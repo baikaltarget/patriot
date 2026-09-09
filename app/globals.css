@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ДИЗАЙН. Токены и базовые стили. Тексты — в content/site.json */
+:root {
+  --paper: #fafaf7;
+  --chalk: #eff0ec;
+  --line: #c7cac5;
+  --ink: #22262a;
+  --dim: #6b7075;
+  --signal: #e85d04;
+  --signal-deep: #c24b00;
+  --alert: #d7263d;
+  --radius: 3px;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-size: 17px;
+    line-height: 1.55;
+    font-feature-settings: "ss01", "cv05";
+  }
+  h1, h2, h3 { @apply font-semibold tracking-tight; text-wrap: balance; }
+  h1 { font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.05; letter-spacing: -0.025em; }
+  h2 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.15; }
+  h3 { font-size: 1.2rem; line-height: 1.3; }
+  a { @apply underline-offset-4; }
+  :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+  table { border-collapse: collapse; }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-site px-5 md:px-8; }
+  .section { @apply py-14 md:py-20; }
+  .btn { @apply inline-flex items-center justify-center gap-2 px-5 py-3 font-medium no-underline transition-colors rounded-[var(--radius)]; }
+  .btn-signal { @apply btn bg-signal text-white hover:bg-signalDeep; }
+  .btn-ink { @apply btn bg-ink text-paper hover:bg-black; }
+  .btn-ghost { @apply btn border border-ink text-ink hover:bg-chalk; }
+  .rule { @apply border-t border-line; }
+  .dimension { @apply font-mono text-[13px] text-dim; }
+  .table-price { @apply w-full text-left; }
+  .table-price th { @apply border-b border-ink py-2 pr-4 text-sm font-medium text-dim; }
+  .table-price td { @apply border-b border-line py-3 pr-4 align-top; }
+  .table-price td .needs-data, .table-price td .needs-data.inline { display: inline-block; }
+  .table-price td.num, .table-price th.num { @apply text-right font-mono tabular-nums whitespace-nowrap pr-0; }
+
+  /* Красная рамка: место требует данных заказчика. Выключается в site.json -> flags.showNeedsDataFrames */
+  .needs-data { position: relative; outline: 2px dashed var(--alert); outline-offset: 4px; }
+  .needs-data::after {
+    content: "нужны данные заказчика";
+    position: absolute; top: -12px; right: 6px;
+    background: var(--alert); color: #fff;
+    font-size: 11px; line-height: 1; padding: 4px 6px;
+    font-family: var(--font-mono); letter-spacing: 0.02em;
+    pointer-events: none;
+  }
+  .needs-data.photo::after { content: "заменить на оригинал"; }
+  .needs-data.inline { outline: none; border-bottom: 2px dashed var(--alert); }
+  .needs-data.inline::after { display: none; }
+
+  .prose { max-width: 68ch; }
+  .prose h2 { @apply mt-10 mb-3; }
+  .prose h3 { @apply mt-7 mb-2; }
+  .prose p, .prose ul, .prose ol { @apply mb-4; }
+  .prose ul { @apply list-disc pl-5; }
+  .prose ol { @apply list-decimal pl-5; }
+  .prose li { @apply mb-1; }
+  .prose a { @apply text-signalDeep underline; }
+  .prose strong { @apply font-semibold; }
+}
