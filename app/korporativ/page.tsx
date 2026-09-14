@@ -3,7 +3,7 @@ import { content } from "@/lib/content";
 import { meta, serviceLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { Hero, SpecStrip, Blocks, Gallery, CaseList, TeamBuilding, Layouts } from "@/components/Sections";
+import { Hero, SpecStrip, Blocks, Gallery, CaseList, TeamBuilding, SeatingSchemes } from "@/components/Sections";
 import PriceTable from "@/components/PriceTable";
 import LeadForm from "@/components/LeadForm";
 import Faq from "@/components/Faq";
@@ -16,18 +16,33 @@ export default function Page() {
     <>
       <JsonLd data={serviceLd({ name: "Зал для корпоратива в Иркутске", description: pg.description, path: "/korporativ/", price: 15000, priceUnit: "вечер 4–6 часов" })} />
       <Breadcrumbs items={[{ name: "Корпоратив", href: "/korporativ/" }]} />
-      <Hero h1={pg.h1} lead={pg.lead} layout="banquet" priceFrom={15000} priceUnit="за вечер 4–6 часов" secondary={{ label: "Новогодний корпоратив", href: "/korporativ/novogodniy/" }} />
+      <Hero
+        h1={pg.h1}
+        lead={pg.lead}
+        image={{ src: "/img/koncert-01.jpg", alt: "Награждение на сцене Мультихолла, корпоративное мероприятие" }}
+        priceFrom={15000}
+        priceUnit="за вечер 4–6 часов"
+        secondary={{ label: "Новогодний корпоратив", href: "/korporativ/novogodniy/" }}
+      />
       <SpecStrip />
       <Blocks items={pg.blocks} />
       <TeamBuilding />
-      <Gallery prefix="corp" />
-      <Layouts />
+      <Gallery
+        title="Реальные корпоративы и праздники"
+        images={[
+          { src: "/img/koncert-02.jpg", alt: "Сцена с фирменным оформлением на корпоративном мероприятии" },
+          { src: "/img/hall-02.jpg", alt: "Полный зал на мероприятии в Мультихолле" },
+          { src: "/img/festival-01.jpg", alt: "Праздничная программа на сцене Мультихолла" },
+          { src: "/img/koncert-01.jpg", alt: "Награждение с цветной подсветкой сцены" },
+        ]}
+      />
+      <SeatingSchemes />
       <section className="section bg-chalk">
         <div className="wrap">
           <h2 className="mb-2">Что стоит вечер</h2>
-          <p className="mb-8 max-w-[60ch] text-dim">Зал 15 000 ₽, звук 5 000, микрофон 2 000, уборка 1 500 — 23 500 ₽ за площадку на любое число гостей до 200. На 100 человек это 235 ₽ с каждого.</p>
+          <p className="mb-8 max-w-[60ch] text-dim">Зал 15 000 ₽, звук 5 000, микрофон 2 000, уборка 1 500 — 23 500 ₽ за площадку на любое число гостей до 96. На 90 человек это около 260 ₽ с каждого.</p>
           <PriceTable compact />
-          <p className="mt-6"><Link href="/#zayavka" className="underline">Посчитать точнее в калькуляторе на главной</Link></p>
+          <p className="mt-6"><Link href="/#zayavka" className="text-brandBlue underline">Посчитать точнее в калькуляторе на главной</Link></p>
         </div>
       </section>
       <CaseList filter={(c) => c.format === "Корпоратив"} title="Корпоративы со сметой" />

@@ -93,7 +93,7 @@ export default function Calculator() {
             <h3 className="mb-1">Сколько участников?</h3>
             <p className="mb-4 text-dim">До 300 театром, до 200 за столами, до 100 классом.</p>
             <div className="flex items-center gap-4">
-              <input type="range" min={10} max={300} step={10} value={guests} onChange={(e) => setGuests(+e.target.value)} className="w-full accent-[var(--signal)]" aria-label="Количество участников" />
+              <input type="range" min={10} max={300} step={10} value={guests} onChange={(e) => setGuests(+e.target.value)} className="w-full accent-[var(--brand-red)]" aria-label="Количество участников" />
               <span className="w-24 font-mono text-2xl">{guests}</span>
             </div>
             <div className="mt-6 flex gap-2">

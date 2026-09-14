@@ -2,17 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ДИЗАЙН. Токены и базовые стили. Тексты — в content/site.json */
+/* ДИЗАЙН. Токены — фирменный стиль park-patriot.com. Тексты — в content/site.json */
 :root {
-  --paper: #fafaf7;
-  --chalk: #eff0ec;
-  --line: #c7cac5;
-  --ink: #22262a;
-  --dim: #6b7075;
-  --signal: #e85d04;
-  --signal-deep: #c24b00;
-  --alert: #d7263d;
-  --radius: 3px;
+  --paper: #ffffff;
+  --chalk: #f3f3f3;
+  --line: #e1e1e1;
+  --ink: #181818;
+  --dim: #666666;
+  --brand-red: #db2200;
+  --brand-red-deep: #b31c00;
+  --brand-blue: #0d70cc;
+  --footer: #1c1c1c;
+  --flag: #8b5cf6;
 }
 
 @layer base {
@@ -25,44 +26,62 @@
     @apply bg-paper text-ink font-sans antialiased;
     font-size: 17px;
     line-height: 1.55;
-    font-feature-settings: "ss01", "cv05";
   }
-  h1, h2, h3 { @apply font-semibold tracking-tight; text-wrap: balance; }
-  h1 { font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.05; letter-spacing: -0.025em; }
-  h2 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.15; }
+  h1, h2, h3 { @apply font-bold tracking-tight; text-wrap: balance; }
+  h1 { font-size: clamp(2rem, 4.2vw, 3.1rem); line-height: 1.08; }
+  h2 { font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.18; }
   h3 { font-size: 1.2rem; line-height: 1.3; }
   a { @apply underline-offset-4; }
-  :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--brand-blue); outline-offset: 3px; }
   table { border-collapse: collapse; }
 }
 
 @layer components {
   .wrap { @apply mx-auto w-full max-w-site px-5 md:px-8; }
   .section { @apply py-14 md:py-20; }
-  .btn { @apply inline-flex items-center justify-center gap-2 px-5 py-3 font-medium no-underline transition-colors rounded-[var(--radius)]; }
-  .btn-signal { @apply btn bg-signal text-white hover:bg-signalDeep; }
+
+  /* Кнопки — острые углы, красная заливка, как на park-patriot.com */
+  .btn { @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-bold no-underline transition-colors; }
+  .btn-signal { @apply btn bg-brandRed text-white hover:bg-brandRedDeep; }
   .btn-ink { @apply btn bg-ink text-paper hover:bg-black; }
-  .btn-ghost { @apply btn border border-ink text-ink hover:bg-chalk; }
+  .btn-ghost { @apply btn border-2 border-ink text-ink hover:bg-chalk; }
+
   .rule { @apply border-t border-line; }
   .dimension { @apply font-mono text-[13px] text-dim; }
   .table-price { @apply w-full text-left; }
-  .table-price th { @apply border-b border-ink py-2 pr-4 text-sm font-medium text-dim; }
+  .table-price th { @apply border-b-2 border-ink py-2 pr-4 text-sm font-medium text-dim; }
   .table-price td { @apply border-b border-line py-3 pr-4 align-top; }
-  .table-price td .needs-data, .table-price td .needs-data.inline { display: inline-block; }
   .table-price td.num, .table-price th.num { @apply text-right font-mono tabular-nums whitespace-nowrap pr-0; }
+  .table-price td .needs-data, .table-price td .needs-data.inline { display: inline-block; }
 
-  /* Красная рамка: место требует данных заказчика. Выключается в site.json -> flags.showNeedsDataFrames */
-  .needs-data { position: relative; outline: 2px dashed var(--alert); outline-offset: 4px; }
+  /* Круглая синяя стрелка карусели — фирменный элемент park-patriot.com */
+  .nav-circle {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brandBlue text-white transition-transform hover:scale-105 disabled:opacity-30 disabled:hover:scale-100;
+  }
+  .nav-circle-outline {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-brandBlue text-brandBlue transition-colors hover:bg-brandBlue hover:text-white;
+  }
+
+  /* Карточка локации: фото, заголовок, текст, красная кнопка — паттерн с сайта парка */
+  .loc-card { @apply flex flex-col no-underline; }
+  .loc-card figure { @apply aspect-[4/3] w-full overflow-hidden bg-chalk; }
+  .loc-card img { @apply h-full w-full object-cover transition-transform duration-300; }
+  .loc-card:hover img { @apply scale-[1.03]; }
+  .loc-card h3 { @apply mt-4 text-ink; }
+  .loc-card p { @apply mt-2 flex-1 text-[15px] text-dim; }
+
+  /* Красная пунктирная рамка — место требует данных заказчика */
+  .needs-data { position: relative; outline: 2px dashed var(--flag); outline-offset: 4px; }
   .needs-data::after {
     content: "нужны данные заказчика";
     position: absolute; top: -12px; right: 6px;
-    background: var(--alert); color: #fff;
+    background: var(--flag); color: #fff;
     font-size: 11px; line-height: 1; padding: 4px 6px;
     font-family: var(--font-mono); letter-spacing: 0.02em;
     pointer-events: none;
   }
-  .needs-data.photo::after { content: "заменить на оригинал"; }
-  .needs-data.inline { outline: none; border-bottom: 2px dashed var(--alert); }
+  .needs-data.photo::after { content: "заменить/проверить"; }
+  .needs-data.inline { outline: none; border-bottom: 2px dashed var(--flag); }
   .needs-data.inline::after { display: none; }
 
   .prose { max-width: 68ch; }
@@ -72,6 +91,6 @@
   .prose ul { @apply list-disc pl-5; }
   .prose ol { @apply list-decimal pl-5; }
   .prose li { @apply mb-1; }
-  .prose a { @apply text-signalDeep underline; }
+  .prose a { @apply text-brandBlue underline; }
   .prose strong { @apply font-semibold; }
 }

@@ -3,7 +3,7 @@ import { meta, serviceLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import LeadForm from "@/components/LeadForm";
-import FloorPlan from "@/components/FloorPlan";
+import PhotoSlot from "@/components/PhotoSlot";
 
 const pg = content.pages.equipment;
 const eq = content.equipment;
@@ -20,7 +20,7 @@ export default function Page() {
           <h1>{pg.h1}</h1>
           <p className="mt-5 max-w-[56ch] text-lg text-dim">{pg.lead}</p>
         </div>
-        <FloorPlan layout="empty" rooms caption={false} />
+        <PhotoSlot src="/img/vks-01.jpg" alt="Видеоконференцсвязь и экран в Мультихолле" ratio="4/3" placeholder={false} />
       </section>
       <section className="wrap section pt-0">
         <div className="grid gap-12 md:grid-cols-2">

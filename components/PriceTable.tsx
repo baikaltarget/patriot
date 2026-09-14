@@ -58,7 +58,7 @@ export default function PriceTable({ compact = false }: { compact?: boolean }) {
         <ul className="grid gap-2 text-[15px] md:col-span-2 md:grid-cols-2">
           {p.terms.map((t) => (
             <NeedsData key={t.text} on={!!t.needsData} as="li" className="flex gap-3">
-              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 bg-signal" />
+              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 bg-brandRed" />
               <span>{t.text}</span>
             </NeedsData>
           ))}

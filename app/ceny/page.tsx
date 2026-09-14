@@ -14,7 +14,7 @@ export default function Page() {
   return (
     <>
       {content.pricing.tariffs.map((t) => (
-        <JsonLd key={t.id} data={productLd({ name: `Аренда зала: ${t.name}`, description: `${t.name}, ${t.unit}. Зал 346 м² до 300 человек, Иркутск.`, path: "/ceny/", price: t.price })} />
+        <JsonLd key={t.id} data={productLd({ name: `Аренда зала: ${t.name}`, description: `${t.name}, ${t.unit}. Зал 300 м² до 175 человек, Иркутск.`, path: "/ceny/", price: t.price })} />
       ))}
       <Breadcrumbs items={[{ name: "Цены", href: "/ceny/" }]} />
       <section className="wrap py-10 md:py-16">

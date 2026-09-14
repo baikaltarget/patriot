@@ -16,12 +16,27 @@ export default function Page() {
     <>
       <JsonLd data={serviceLd({ name: "Площадка для концертов и выставок в Иркутске", description: pg.description, path: "/ploshchadka/", price: 15000, priceUnit: "за мероприятие 4–6 часов" })} />
       <Breadcrumbs items={[{ name: "Концерты и выставки", href: "/ploshchadka/" }]} />
-      <Hero h1={pg.h1} lead={pg.lead} layout="empty" priceFrom={15000} priceUnit="за мероприятие, сцена включена" secondary={{ label: "Оборудование и райдер", href: "/oborudovanie/" }} />
+      <Hero
+        h1={pg.h1}
+        lead={pg.lead}
+        image={{ src: "/img/koncert-02.jpg", alt: "Сцена Мультихолла со светом на мероприятии" }}
+        priceFrom={15000}
+        priceUnit="за мероприятие, сцена включена"
+        secondary={{ label: "Оборудование и райдер", href: "/oborudovanie/" }}
+      />
       <SpecStrip />
       <Blocks items={pg.blocks} />
-      <Gallery prefix="venue" />
+      <Gallery
+        title="Реальные концерты и события"
+        images={[
+          { src: "/img/koncert-01.jpg", alt: "Награждение на сцене с цветной подсветкой" },
+          { src: "/img/festival-01.jpg", alt: "Праздничная программа на сцене" },
+          { src: "/img/hall-02.jpg", alt: "Полный зал сверху" },
+          { src: "/img/hall-03.jpg", alt: "Зал во время мероприятия с экраном" },
+        ]}
+      />
       <section className="section bg-chalk">
-        <div className="wrap"><h2 className="mb-8">Тарифы</h2><PriceTable compact /><p className="mt-6 text-dim">Свет, подвес, конференц-системы и персонал — в <Link href="/oborudovanie/" className="underline">полном прайсе оборудования</Link>.</p></div>
+        <div className="wrap"><h2 className="mb-8">Тарифы</h2><PriceTable compact /><p className="mt-6 text-dim">Свет, подвес, конференц-системы и персонал — в <Link href="/oborudovanie/" className="text-brandBlue underline">полном прайсе оборудования</Link>.</p></div>
       </section>
       <CaseList filter={(c) => ["Выставка", "Презентация"].includes(c.format)} title="Выставки и презентации со сметой" />
       <FormatList title="Форматы" />

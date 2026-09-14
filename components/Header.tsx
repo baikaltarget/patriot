@@ -8,18 +8,17 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
-      <div className="wrap flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex items-baseline gap-2 no-underline">
-          <span className="text-lg font-semibold tracking-tight">{s.name}</span>
-          <span className="hidden whitespace-nowrap text-sm text-dim md:inline lg:hidden 2xl:inline">{s.parentName}, Иркутск</span>
+      <div className="wrap flex h-20 items-center justify-between gap-4">
+        <Link href="/" className="flex shrink-0 items-center no-underline" aria-label={`${s.name} — на главную`}>
+          <img src={s.logo.color} alt={s.parentName} width={168} height={72} className="h-12 w-auto md:h-14" />
         </Link>
         <nav aria-label="Основное меню" className="hidden items-center gap-4 whitespace-nowrap text-[14px] lg:flex xl:gap-5 xl:text-[15px]">
           {content.nav.map((n) => (
-            <Link key={n.href} href={n.href} className="no-underline hover:underline">{n.label}</Link>
+            <Link key={n.href} href={n.href} className="no-underline hover:text-brandBlue">{n.label}</Link>
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <a href={`tel:${s.phoneRaw}`} className="hidden whitespace-nowrap font-semibold no-underline md:inline">{s.phone}</a>
+          <a href={`tel:${s.phoneRaw}`} className="hidden whitespace-nowrap font-bold no-underline md:inline hover:text-brandBlue">{s.phone}</a>
           <a href="#zayavka" className="btn-signal hidden whitespace-nowrap !py-2 md:inline-flex">Забронировать</a>
           <button
             type="button"

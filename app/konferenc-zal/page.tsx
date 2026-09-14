@@ -15,10 +15,25 @@ export default function Page() {
     <>
       <JsonLd data={serviceLd({ name: "Аренда конференц-зала в Иркутске", description: pg.description, path: "/konferenc-zal/", price: 30000, priceUnit: "полный день 10 часов" })} />
       <Breadcrumbs items={[{ name: "Конференц-зал", href: "/konferenc-zal/" }]} />
-      <Hero h1={pg.h1} lead={pg.lead} layout="theatre" priceFrom={30000} priceUnit="за полный день, 10 часов" cta="Запросить расчёт" />
+      <Hero
+        h1={pg.h1}
+        lead={pg.lead}
+        image={{ src: "/img/conf-01.jpg", alt: "Панельная дискуссия в конференц-зале Мультихолл" }}
+        priceFrom={30000}
+        priceUnit="за полный день, 10 часов"
+        cta="Запросить расчёт"
+      />
       <SpecStrip />
       <Blocks items={pg.blocks} />
-      <Gallery prefix="conf" />
+      <Gallery
+        title="Реальные конференции в зале"
+        images={[
+          { src: "/img/conf-02.jpg", alt: "Панельная дискуссия, форум в Мультихолле" },
+          { src: "/img/hall-03.jpg", alt: "Зал во время доклада с проекцией" },
+          { src: "/img/vks-01.jpg", alt: "Видеоконференцсвязь на мероприятии в Мультихолле" },
+          { src: "/img/format-class.jpg", alt: "Рассадка классом на турнире в Мультихолле" },
+        ]}
+      />
       <HallList title="Большой зал, малый зал, переговорная" />
       <section className="section bg-chalk">
         <div className="wrap"><h2 className="mb-8">Тарифы для деловых мероприятий</h2><PriceTable /></div>

@@ -4,10 +4,19 @@ import { content, estimate, fmt, layoutName } from "@/lib/content";
 import { meta, serviceLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import FloorPlan from "@/components/FloorPlan";
+import PhotoSlot from "@/components/PhotoSlot";
 import LeadForm from "@/components/LeadForm";
 import Faq from "@/components/Faq";
 import { FormatList, CaseList } from "@/components/Sections";
+
+const formatImage: Record<string, { src: string; alt: string }> = {
+  seminar: { src: "/img/format-class.jpg", alt: "Рассадка классом на реальном турнире в Мультихолле" },
+  trening: { src: "/img/format-class.jpg", alt: "Рассадка классом в Мультихолле" },
+  prezentaciya: { src: "/img/conf-02.jpg", alt: "Презентация на сцене Мультихолла" },
+  "master-klass": { src: "/img/format-class.jpg", alt: "Столы и стулья для мастер-класса" },
+  vystavka: { src: "/img/koncert-02.jpg", alt: "Мероприятие с партнёрами в Мультихолле" },
+  koncert: { src: "/img/koncert-01.jpg", alt: "Концертная программа на сцене Мультихолла" },
+};
 
 export function generateStaticParams() {
   return content.formats.map((f) => ({ slug: f.slug }));
@@ -46,14 +55,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             <Link href={parent.href} className="btn-ghost">{parent.name}</Link>
           </div>
         </div>
-        <FloorPlan layout={f.layout as "theatre"} caption />
+        <PhotoSlot {...(formatImage[f.slug] ?? { src: "/img/hall-01.jpg", alt: f.h1 })} ratio="4/3" placeholder={false} />
       </section>
       <section className="wrap section pt-0 grid gap-10 md:grid-cols-2">
         <div>
           <h2 className="mb-4">Как это обычно устроено</h2>
           <ul className="grid gap-3">
             {f.tips.map((t) => (
-              <li key={t} className="flex gap-3"><span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 bg-signal" /><span>{t}</span></li>
+              <li key={t} className="flex gap-3"><span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 bg-brandRed" /><span>{t}</span></li>
             ))}
           </ul>
         </div>

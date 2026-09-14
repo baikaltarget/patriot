@@ -5,10 +5,16 @@ import { meta, productLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import NeedsData from "@/components/NeedsData";
-import FloorPlan from "@/components/FloorPlan";
 import PhotoSlot from "@/components/PhotoSlot";
 import LeadForm from "@/components/LeadForm";
 import { CaseList } from "@/components/Sections";
+
+const layoutIllustration: Record<string, { src: string; alt: string }> = {
+  theatre: { src: "/img/hall-02.jpg", alt: "Иллюстрация: рассадка театром в Мультихолле" },
+  class: { src: "/img/format-class.jpg", alt: "Иллюстрация: рассадка классом в Мультихолле" },
+  banquet: { src: "/img/koncert-01.jpg", alt: "Иллюстрация: сцена на банкете в Мультихолле" },
+  buffet: { src: "/img/conf-02.jpg", alt: "Иллюстрация: сцена на мероприятии в Мультихолле" },
+};
 
 export function generateStaticParams() {
   return content.cases.map((c) => ({ slug: c.slug }));
@@ -43,7 +49,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             <p className="mt-4 max-w-[60ch]">{c.detail}</p>
           </div>
           <div>
-            <FloorPlan layout={c.layout as "theatre"} caption={false} />
+            <PhotoSlot {...(layoutIllustration[c.layout] ?? layoutIllustration.theatre)} ratio="4/3" placeholder={false} />
+            <p className="dimension mt-2">Иллюстративное фото зала, не с этого мероприятия</p>
             <h2 className="mb-3 mt-8">Смета</h2>
             <table className="table-price">
               <tbody>

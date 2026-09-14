@@ -5,11 +5,10 @@ import { meta, serviceLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import NeedsData from "@/components/NeedsData";
-import FloorPlan from "@/components/FloorPlan";
 import PhotoSlot from "@/components/PhotoSlot";
 import LeadForm from "@/components/LeadForm";
 import Faq from "@/components/Faq";
-import { Layouts, HallList } from "@/components/Sections";
+import { SeatingSchemes, HallList } from "@/components/Sections";
 
 export function generateStaticParams() {
   return content.halls.map((h) => ({ slug: h.slug }));
@@ -47,14 +46,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             <Link href="/ceny/" className="btn-ghost">Все цены</Link>
           </div>
         </div>
-        {big ? <FloorPlan layout="theatre" caption /> : <PhotoSlot src={`/img/${h.slug}-01.jpg`} alt={h.name} ratio="4/3" />}
+        <PhotoSlot src={big ? "/img/hall-01.jpg" : `/img/${h.slug}-01.jpg`} alt={h.name} ratio="4/3" placeholder={!big} />
       </section>
       <section className="wrap section pt-0 grid gap-10 md:grid-cols-2">
         <div>
           <h2 className="mb-4">Что в зале</h2>
           <ul className="grid gap-2">
             {h.features.map((f) => (
-              <li key={f} className="flex gap-3"><span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 bg-signal" /><span>{f}</span></li>
+              <li key={f} className="flex gap-3"><span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 bg-brandRed" /><span>{f}</span></li>
             ))}
           </ul>
         </div>
@@ -65,7 +64,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           </ul>
         </div>
       </section>
-      {big && <Layouts />}
+      {big && <SeatingSchemes />}
       <Faq items={h.faq} />
       <HallList title="Другие помещения" />
       <section className="wrap section pt-0"><LeadForm title={`Забронировать: ${h.name}`} /></section>

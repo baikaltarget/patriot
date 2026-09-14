@@ -5,42 +5,61 @@ import { content } from "@/lib/content";
 export default function Footer() {
   const s = content.site;
   return (
-    <footer className="mt-10 border-t border-ink bg-chalk pb-24 pt-12 md:pb-12">
-      <div className="wrap grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+    <footer className="mt-10 bg-footer pb-24 pt-14 text-white md:pb-14">
+      <div className="wrap grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div>
-          <div className="text-xl font-semibold">{s.name}</div>
-          <div className="text-dim">площадка {s.parentName}</div>
-          <a href={`tel:${s.phoneRaw}`} className="mt-5 block text-2xl font-semibold no-underline">{s.phone}</a>
-          <div className="text-dim">{s.managerHours}</div>
-          <address className="mt-4 not-italic">
+          <img src={s.logo.white} alt={s.parentName} width={168} height={72} className="h-12 w-auto" />
+          <div className="mt-3 text-white/60">{s.name}</div>
+          <a href={`tel:${s.phoneRaw}`} className="mt-5 block text-2xl font-bold no-underline">{s.phone}</a>
+          <div className="text-white/60">{s.managerHours}</div>
+          <address className="mt-4 not-italic text-white/80">
             {s.address}
             <br />
-            <a href={`mailto:${s.email}`} className="text-dim hover:text-ink">{s.email}</a>
+            <a href={`mailto:${s.email}`} className="text-white/60 hover:text-white">{s.email}</a>
           </address>
         </div>
-        <nav aria-label="Разделы" className="grid gap-2 text-sm">
-          {content.nav.map((n) => (
-            <Link key={n.href} href={n.href} className="no-underline hover:underline">{n.label}</Link>
-          ))}
-          <Link href="/korporativ/novogodniy/" className="no-underline hover:underline">Новогодний корпоратив</Link>
-          <Link href="/meropriyatiya/" className="no-underline hover:underline">Проведённые мероприятия</Link>
-          <Link href="/blog/" className="no-underline hover:underline">Блог</Link>
-          <Link href="/o-ploshchadke/" className="no-underline hover:underline">О площадке</Link>
-          <Link href="/politika/" className="no-underline hover:underline">Политика конфиденциальности</Link>
+        <nav aria-label="Мероприятия">
+          <div className="mb-3 font-bold text-brandBlue">Мероприятия</div>
+          <div className="grid gap-2 text-[15px] text-white/80">
+            {content.nav.slice(0, 3).map((n) => (
+              <Link key={n.href} href={n.href} className="no-underline hover:text-white">{n.label}</Link>
+            ))}
+            <Link href="/korporativ/novogodniy/" className="no-underline hover:text-white">Новогодний корпоратив</Link>
+            <Link href="/meropriyatiya/" className="no-underline hover:text-white">Проведённые мероприятия</Link>
+          </div>
         </nav>
-        <div className="text-sm text-dim">
-          <div className="mb-2 font-medium text-ink">Парк «Патриот»</div>
-          <a href={s.parentUrl} className="block no-underline hover:underline">Сайт парка</a>
-          <a href={`${s.parentUrl}shooting`} className="block no-underline hover:underline">Стрелковый клуб</a>
-          <a href={`${s.parentUrl}firetag`} className="block no-underline hover:underline">Фаертаг</a>
-          {s.socials.map((x) => (
-            <a key={x.url} href={x.url} className="block no-underline hover:underline" rel="noopener">{x.name}</a>
-          ))}
-          <NeedsData className="mt-6 text-xs leading-relaxed">
+        <nav aria-label="Информация">
+          <div className="mb-3 font-bold text-brandBlue">Информация</div>
+          <div className="grid gap-2 text-[15px] text-white/80">
+            <Link href="/zaly/" className="no-underline hover:text-white">Залы</Link>
+            <Link href="/oborudovanie/" className="no-underline hover:text-white">Оборудование</Link>
+            <Link href="/ceny/" className="no-underline hover:text-white">Цены</Link>
+            <Link href="/blog/" className="no-underline hover:text-white">Блог</Link>
+            <Link href="/o-ploshchadke/" className="no-underline hover:text-white">О площадке</Link>
+            <Link href="/politika/" className="no-underline hover:text-white">Политика конфиденциальности</Link>
+          </div>
+        </nav>
+        <div>
+          <div className="mb-3 font-bold text-brandBlue">Парк «Патриот»</div>
+          <div className="grid gap-2 text-[15px] text-white/80">
+            <a href={s.parentUrl} className="no-underline hover:text-white">Сайт парка</a>
+            <a href={`${s.parentUrl}shooting`} className="no-underline hover:text-white">Стрелковый клуб</a>
+            <a href={`${s.parentUrl}firetag`} className="no-underline hover:text-white">Фаертаг</a>
+            {s.socials.map((x) => (
+              <a key={x.url} href={x.url} className="no-underline hover:text-white" rel="noopener">{x.name}</a>
+            ))}
+          </div>
+          <NeedsData className="mt-6 text-xs leading-relaxed text-white/50">
             © {new Date().getFullYear()} {s.legal.org}
             <br />ИНН {s.legal.inn}, ОГРН {s.legal.ogrn}
           </NeedsData>
         </div>
+      </div>
+      <div className="wrap mt-10 flex items-center justify-between border-t border-white/15 pt-6">
+        <span className="text-xs text-white/40">Мультихолл — площадка {s.parentName}</span>
+        <a href="#top" aria-label="Наверх" className="nav-circle-outline !border-white !text-white hover:!bg-white hover:!text-footer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+        </a>
       </div>
     </footer>
   );

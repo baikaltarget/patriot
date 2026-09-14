@@ -33,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className={`${golos.variable} ${mono.variable}`}>
       <body>
+        <div id="top" />
         <JsonLd data={organizationLd()} />
         <JsonLd data={localBusinessLd()} />
         <Header />
