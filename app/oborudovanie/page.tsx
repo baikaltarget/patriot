@@ -3,7 +3,7 @@ import { meta, serviceLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import LeadForm from "@/components/LeadForm";
-import PhotoSlot from "@/components/PhotoSlot";
+import { Hero } from "@/components/Sections";
 
 const pg = content.pages.equipment;
 const eq = content.equipment;
@@ -15,13 +15,14 @@ export default function Page() {
     <>
       <JsonLd data={serviceLd({ name: "Аренда проектора, звука и света в Иркутске", description: pg.description, path: "/oborudovanie/", price: 12000, priceUnit: "базовый комплект: проектор, звук, микрофон" })} />
       <Breadcrumbs items={[{ name: "Оборудование", href: "/oborudovanie/" }]} />
-      <section className="wrap grid items-start gap-10 py-10 md:grid-cols-[1.1fr_1fr] md:py-16">
-        <div>
-          <h1>{pg.h1}</h1>
-          <p className="mt-5 max-w-[56ch] text-lg text-dim">{pg.lead}</p>
-        </div>
-        <PhotoSlot src="/img/vks-01.jpg" alt="Видеоконференцсвязь и экран в Мультихолле" ratio="4/3" placeholder={false} />
-      </section>
+      <Hero
+        h1={pg.h1}
+        lead={pg.lead}
+        image={{ src: "/img/vks-01.jpg", alt: "Проекция и звук на мероприятии в Мультихолле" }}
+        priceFrom={12000}
+        priceUnit="базовый комплект: проектор, звук, микрофон"
+        cta="Уточнить оборудование"
+      />
       <section className="wrap section pt-0">
         <div className="grid gap-12 md:grid-cols-2">
           {eq.categories.map((cat) => (

@@ -163,7 +163,7 @@ export function SeatingSchemes() {
         <SectionHead label="Вместимость" title="По официальным схемам рассадки," muted="а не на глаз" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {content.hall.layouts.map((l) => (
-            <NeedsData key={l.id} on={!!l.needsData} className="card !p-4">
+            <NeedsData key={l.id} on={!!("needsData" in l && l.needsData)} className="card !p-4">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-cardSm bg-white">
                 {l.scheme ? (
                   <Zoom src={l.scheme} alt={`Схема рассадки: ${l.name}`} imgClassName="h-full w-full object-contain p-2" />
@@ -264,7 +264,7 @@ export function CaseList({ title = "Проведённые мероприяти�
           {cases.map((c) => {
             const e = caseEstimate(c);
             return (
-              <NeedsData key={c.slug} on={!!c.needsData} className="card flex flex-col">
+              <NeedsData key={c.slug} on={!!("needsData" in c && c.needsData)} className="card flex flex-col">
                 <Link href={`/meropriyatiya/${c.slug}/`} className="group flex h-full flex-col no-underline">
                   <div className="flex items-baseline justify-between text-sm text-dim">
                     <span>{c.format} · {layoutName(c.layout)}</span>

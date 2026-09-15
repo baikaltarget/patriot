@@ -53,7 +53,8 @@ export function estimate(opts: {
 
 export function caseEstimate(c: Case) {
   return estimate({
-    duration: c.duration as "short" | "day" | "twodays",
+    duration: c.duration as "short" | "day" | "twodays" | "hourly",
+    hours: "hours" in c ? (c.hours as number) : undefined,
     extras: c.extras,
     rooms: c.rooms,
     roomsHours: c.roomsHours,

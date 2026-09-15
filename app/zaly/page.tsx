@@ -1,7 +1,6 @@
 import { meta } from "@/lib/seo";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import PhotoSlot from "@/components/PhotoSlot";
-import { HallList } from "@/components/Sections";
+import { Hero, HallList } from "@/components/Sections";
 import LeadForm from "@/components/LeadForm";
 
 export const metadata = meta({
@@ -14,13 +13,14 @@ export default function Page() {
   return (
     <>
       <Breadcrumbs items={[{ name: "Залы", href: "/zaly/" }]} />
-      <section className="wrap grid items-center gap-10 py-10 md:grid-cols-2 md:py-16">
-        <div>
-          <h1>Залы и помещения</h1>
-          <p className="mt-5 max-w-[52ch] text-lg text-dim">Большой зал со сценой и малый зал рядом. Берутся вместе под конференцию или по отдельности — малый зал по часам под тренинг или кофе-брейк.</p>
-        </div>
-        <PhotoSlot src="/img/hall-01.jpg" alt="Большой зал Мультихолл" ratio="4/3" placeholder={false} />
-      </section>
+      <Hero
+        h1="Залы и помещения"
+        lead="Большой зал 300 м² со сценой и малый зал 68 м² рядом. Берутся вместе под конференцию или по отдельности — малый зал по часам под тренинг или кофе-брейк."
+        image={{ src: "/img/hall-01.jpg", alt: "Большой зал Мультихолл" }}
+        priceFrom={1500}
+        priceUnit="за час малого зала, большой — от 15 000 ₽"
+        cta="Подобрать зал"
+      />
       <HallList title="Что есть" />
       <section className="wrap section pt-0"><LeadForm /></section>
     </>

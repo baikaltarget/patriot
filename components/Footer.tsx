@@ -56,7 +56,16 @@ export default function Footer() {
         </div>
       </div>
       <div className="wrap mt-10 flex items-center justify-between border-t border-white/15 pt-6">
-        <span className="text-xs text-white/40">Мультихолл — площадка {s.parentName}</span>
+        <span className="text-xs text-white/40">
+          Мультихолл — площадка {s.parentName}
+          {s.developer && (
+            <>
+              {" · "}
+              {s.developer.text} —{" "}
+              <a href={s.developer.url} target="_blank" rel="noopener" className="text-white/55 hover:text-white/80">{s.developer.name}</a>
+            </>
+          )}
+        </span>
         <a href="#top" aria-label="Наверх" className="nav-circle-outline !border-white !text-white hover:!bg-white hover:!text-footer">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
         </a>

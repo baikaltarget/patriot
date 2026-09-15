@@ -4,17 +4,9 @@ import { caseEstimate, content, fmt, layoutName } from "@/lib/content";
 import { meta, productLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import NeedsData from "@/components/NeedsData";
 import PhotoSlot from "@/components/PhotoSlot";
 import LeadForm from "@/components/LeadForm";
 import { CaseList } from "@/components/Sections";
-
-const layoutIllustration: Record<string, { src: string; alt: string }> = {
-  theatre: { src: "/img/hall-02.jpg", alt: "Иллюстрация: рассадка театром в Мультихолле" },
-  class: { src: "/img/format-class.jpg", alt: "Иллюстрация: рассадка классом в Мультихолле" },
-  banquet: { src: "/img/koncert-01.jpg", alt: "Иллюстрация: сцена на банкете в Мультихолле" },
-  buffet: { src: "/img/conf-02.jpg", alt: "Иллюстрация: сцена на мероприятии в Мультихолле" },
-};
 
 export function generateStaticParams() {
   return content.cases.map((c) => ({ slug: c.slug }));
@@ -40,7 +32,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     <>
       <JsonLd data={productLd({ name: c.name, description: c.summary, path: `/meropriyatiya/${c.slug}/`, price: e.total, image: `/img/case-${c.slug}-01.jpg` })} />
       <Breadcrumbs items={[{ name: "Мероприятия", href: "/meropriyatiya/" }, { name: c.name, href: `/meropriyatiya/${c.slug}/` }]} />
-      <NeedsData on={!!c.needsData} className="wrap my-6">
+      <div className="wrap my-6">
         <section className="grid items-start gap-10 py-6 md:grid-cols-2 md:py-10">
           <div>
             <p className="text-dim">{c.format} · {layoutName(c.layout)} · {c.guests} человек</p>
@@ -49,8 +41,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             <p className="mt-4 max-w-[60ch]">{c.detail}</p>
           </div>
           <div>
-            <PhotoSlot {...(layoutIllustration[c.layout] ?? layoutIllustration.theatre)} ratio="4/3" placeholder={false} />
-            <p className="dimension mt-2">Иллюстративное фото зала, не с этого мероприятия</p>
+            <PhotoSlot src={c.photos[0]} alt={c.name} ratio="4/3" placeholder={false} />
             <h2 className="mb-3 mt-8">Смета</h2>
             <table className="table-price">
               <tbody>
@@ -62,11 +53,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           </div>
         </section>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-          <PhotoSlot src={`/img/case-${c.slug}-01.jpg`} alt={c.name} />
-          <PhotoSlot src={`/img/case-${c.slug}-02.jpg`} alt={c.name} />
-          <PhotoSlot src={`/img/case-${c.slug}-03.jpg`} alt={c.name} />
+          {c.photos.map((src) => (
+            <PhotoSlot key={src} src={src} alt={`${c.name} — Мультихолл, Иркутск`} placeholder={false} />
+          ))}
         </div>
-      </NeedsData>
+        <p className="dimension mt-3">Фотографии сделаны в этом зале на мероприятиях похожего формата</p>
+      </div>
       <p className="wrap text-dim">Похожее мероприятие? <Link href="/ceny/" className="underline">Посчитайте своё в калькуляторе</Link> — цены те же.</p>
       <CaseList title="Другие мероприятия" filter={(x) => x.slug !== c.slug} limit={3} />
       <section className="wrap section pt-0"><LeadForm preset={{ event: c.format, guests: String(c.guests) }} /></section>
