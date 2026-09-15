@@ -22,7 +22,7 @@ const config: Config = {
         sans: ["var(--font-golos)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
-      maxWidth: { site: "1520px" },
+      maxWidth: { site: "1440px" },
       borderRadius: {
         card: "var(--radius)",
         cardSm: "var(--radius-sm)",
