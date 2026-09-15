@@ -117,7 +117,7 @@ export function Blocks({ title, items, cols = 2, label = "Преимуществ
         {title && <SectionHead label={label} title={title} />}
         <div className={`grid gap-4 ${cols === 4 ? "md:grid-cols-2 lg:grid-cols-4" : cols === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
           {items.map((it) => (
-            <NeedsData key={it.t} on={!!it.needsData} className="card">
+            <NeedsData key={it.t} on={!!("needsData" in it && it.needsData)} className="card">
               <h3 className="mb-3">{it.t}</h3>
               <p className="text-[15px] text-dim">{it.d}</p>
             </NeedsData>

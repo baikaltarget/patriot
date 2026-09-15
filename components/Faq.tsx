@@ -12,7 +12,7 @@ export default function Faq({ items, title = "Вопросы и ответы" }:
         <h2 className="mb-6">{title}</h2>
         <div className="grid max-w-3xl gap-3">
           {items.map((it) => (
-            <NeedsData key={it.q} on={!!it.needsData} as="div" className="rounded-cardSm bg-chalk px-5">
+            <NeedsData key={it.q} on={!!("needsData" in it && it.needsData)} as="div" className="rounded-cardSm bg-chalk px-5">
               <details className="group">
                 <summary className="flex cursor-pointer list-none items-baseline justify-between gap-6 py-4 font-medium">
                   <span>{it.q}</span>

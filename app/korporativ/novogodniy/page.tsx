@@ -2,7 +2,6 @@ import { content } from "@/lib/content";
 import { meta, serviceLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import NeedsData from "@/components/NeedsData";
 import { Hero, Blocks, Gallery, TeamBuilding } from "@/components/Sections";
 import LeadForm from "@/components/LeadForm";
 import Faq from "@/components/Faq";
@@ -23,24 +22,6 @@ export default function Page() {
         priceUnit="за вечер 4–6 часов"
         cta="Проверить дату"
       />
-      <section className="section bg-chalk">
-        <div className="wrap">
-          <h2 className="mb-2">Даты декабря {pg.seasonYear}</h2>
-          <p className="mb-6 text-dim">Обновляется вручную менеджером. Позвоните, чтобы подтвердить.</p>
-          <NeedsData on={pg.datesNeedsData} className="inline-block">
-            <table className="table-price min-w-[320px]">
-              <tbody>
-                {pg.dates.map((d) => (
-                  <tr key={d.date}>
-                    <td>{d.date}</td>
-                    <td className={`num ${d.status === "занято" ? "text-dim line-through" : "text-brandBlue font-medium"}`}>{d.status}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </NeedsData>
-        </div>
-      </section>
       <Blocks items={pg.blocks} />
       <TeamBuilding />
       <Gallery

@@ -1,7 +1,6 @@
 import { content } from "@/lib/content";
 import { meta } from "@/lib/seo";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import NeedsData from "@/components/NeedsData";
 import PhotoSlot from "@/components/PhotoSlot";
 import { Gallery, HallList, SpecStrip } from "@/components/Sections";
 import LeadForm from "@/components/LeadForm";
@@ -14,12 +13,12 @@ export default function Page() {
     <>
       <Breadcrumbs items={[{ name: "О площадке", href: "/o-ploshchadke/" }]} />
       <section className="wrap grid items-center gap-10 py-10 md:grid-cols-2 md:py-16">
-        <NeedsData on={pg.needsData}>
+        <div>
           <h1>{pg.h1}</h1>
           <div className="mt-5 grid max-w-[60ch] gap-4 text-lg text-dim">
             {pg.paragraphs.map((p) => <p key={p}>{p}</p>)}
           </div>
-        </NeedsData>
+        </div>
         <PhotoSlot src="/img/conf-01.jpg" alt="Форум «Легенды Роскосмоса» в Мультихолле" ratio="4/3" placeholder={false} />
       </section>
       <SpecStrip />
