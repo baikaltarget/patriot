@@ -1,4 +1,5 @@
 import NeedsData from "./NeedsData";
+import Zoom from "./Zoom";
 
 /** Место под фото. Пока оригиналов нет — серая плашка с рамкой. Файлы кладутся в public/img/ */
 export default function PhotoSlot({
@@ -23,7 +24,7 @@ export default function PhotoSlot({
           </div>
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+          <Zoom src={src} alt={alt} className="absolute inset-0" imgClassName="h-full w-full object-cover" />
         )}
       </figure>
     </NeedsData>

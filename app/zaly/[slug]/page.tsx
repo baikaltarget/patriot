@@ -46,7 +46,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             <Link href="/ceny/" className="btn-ghost">Все цены</Link>
           </div>
         </div>
-        <PhotoSlot src={big ? "/img/hall-01.jpg" : `/img/${h.slug}-01.jpg`} alt={h.name} ratio="4/3" placeholder={!big} />
+        <PhotoSlot src={h.photo} alt={h.name} ratio="4/3" placeholder={false} />
       </section>
       <section className="wrap section pt-0 grid gap-10 md:grid-cols-2">
         <div>
@@ -66,7 +66,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       </section>
       {big && <SeatingSchemes />}
       <Faq items={h.faq} />
-      <HallList title="Другие помещения" />
+      <HallList title="Второе помещение" />
       <section className="wrap section pt-0"><LeadForm title={`Забронировать: ${h.name}`} /></section>
     </>
   );

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Zoom from "./Zoom";
 import NeedsData from "./NeedsData";
 import PhotoSlot from "./PhotoSlot";
 import { caseEstimate, content, fmt, layoutName } from "@/lib/content";
@@ -156,7 +156,7 @@ export function SeatingSchemes() {
             <NeedsData key={l.id} on={!!l.needsData} className="card !p-4">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-cardSm bg-white">
                 {l.scheme ? (
-                  <Image src={l.scheme} alt={`Схема рассадки: ${l.name}`} width={640} height={480} className="h-full w-full object-contain p-2" />
+                  <Zoom src={l.scheme} alt={`Схема рассадки: ${l.name}`} imgClassName="h-full w-full object-contain p-2" />
                 ) : (
                   <div className="flex h-full items-center justify-center p-4 text-center text-sm text-dim">Официальной схемы для этого формата нет</div>
                 )}
@@ -178,35 +178,24 @@ export function SeatingSchemes() {
 }
 
 /** Залы — фото-карточки с названием и ценой поверх снимка. */
-export function HallList({ title = "Три помещения" }: { title?: string }) {
+export function HallList({ title = "Два помещения" }: { title?: string }) {
   return (
     <section className="section">
       <div className="wrap">
         <SectionHead label="Залы" title={title} right={<Link href="/zaly/" className="btn-ghost !py-2">Все залы <Arrow /></Link>} />
-        <div className="grid gap-4 md:grid-cols-3 md:grid-rows-2">
+        <div className="grid gap-4 md:grid-cols-3">
           {content.halls.map((h) => {
             const big = h.slug === "multihall";
-            return big ? (
-              <Link key={h.slug} href={`/zaly/${h.slug}/`} className="photo-card aspect-[4/5] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[520px]">
-                <img src="/img/hall-01.jpg" alt={h.name} />
-                <div className="shade" />
-                <div className="body">
-                  <div className="text-sm text-white/75">{h.area} м² · {h.capacity}</div>
-                  <h3 className="mt-1 text-2xl text-white md:text-3xl">{h.name}</h3>
-                  <span className="price-pill mt-4">от {fmt(h.priceFrom)}</span>
-                </div>
-              </Link>
-            ) : (
-              <NeedsData key={h.slug} on={!!("needsData" in h && h.needsData)}>
-                <Link href={`/zaly/${h.slug}/`} className="card flex h-full min-h-[240px] flex-col justify-between no-underline">
-                  <div>
-                    <div className="text-sm text-dim">{h.area} м² · {h.capacity}</div>
-                    <h3 className="mt-1">{h.name}</h3>
-                    <p className="mt-2 text-[15px] text-dim">{h.short}</p>
-                  </div>
-                  <div className="mt-6 flex items-center justify-between">
-                    <span className="price-pill">от {fmt(h.priceFrom)} / ч</span>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-white"><Arrow /></span>
+            return (
+              <NeedsData key={h.slug} on={!!("needsData" in h && h.needsData)} className={big ? "md:col-span-2" : ""}>
+                <Link href={`/zaly/${h.slug}/`} className={`photo-card block aspect-[4/5] md:aspect-auto md:h-full ${big ? "md:min-h-[520px]" : "md:min-h-[520px]"}`}>
+                  <img src={h.photo} alt={h.name} />
+                  <div className="shade" />
+                  <div className="body">
+                    <div className="text-sm text-white/75">{h.area} м² · {h.capacity}</div>
+                    <h3 className={`mt-1 text-white ${big ? "text-2xl md:text-3xl" : "text-xl"}`}>{h.name}</h3>
+                    <p className="mt-1 text-sm text-white/80">{h.short}</p>
+                    <span className="price-pill mt-4">от {fmt(h.priceFrom)} {h.priceUnit.replace("за мероприятие 4–6 часов", "").replace("за час", "/ ч")}</span>
                   </div>
                 </Link>
               </NeedsData>

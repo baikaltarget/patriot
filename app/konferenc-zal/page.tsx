@@ -34,7 +34,7 @@ export default function Page() {
           { src: "/img/format-class.jpg", alt: "Рассадка классом на турнире в Мультихолле" },
         ]}
       />
-      <HallList title="Большой зал, малый зал, переговорная" />
+      <HallList title="Большой зал и малый зал" />
       <section className="section bg-chalk">
         <div className="wrap"><h2 className="mb-8">Тарифы для деловых мероприятий</h2><PriceTable /></div>
       </section>
