@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     p("/korporativ/", 0.9),
     p("/korporativ/novogodniy/", 0.8, "weekly"),
     p("/ploshchadka/", 0.8),
+    p("/vypusknoy/", 0.8),
     p("/oborudovanie/", 0.7),
     p("/ceny/", 0.8, "weekly"),
     p("/zaly/", 0.6),
