@@ -1,5 +1,4 @@
 import Link from "next/link";
-import NeedsData from "./NeedsData";
 import { content } from "@/lib/content";
 
 export default function Footer() {
@@ -49,10 +48,10 @@ export default function Footer() {
               <a key={x.url} href={x.url} className="no-underline hover:text-white" rel="noopener">{x.name}</a>
             ))}
           </div>
-          <NeedsData className="mt-6 text-xs leading-relaxed text-white/50">
+          <div className="mt-6 text-xs leading-relaxed text-white/50">
             © {new Date().getFullYear()} {s.legal.org}
             <br />ИНН {s.legal.inn}, ОГРН {s.legal.ogrn}
-          </NeedsData>
+          </div>
         </div>
       </div>
       <div className="wrap mt-10 flex items-center justify-between border-t border-white/15 pt-6">

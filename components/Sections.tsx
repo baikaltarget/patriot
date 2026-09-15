@@ -161,9 +161,9 @@ export function SeatingSchemes() {
     <section className="section">
       <div className="wrap">
         <SectionHead label="Вместимость" title="По официальным схемам рассадки," muted="а не на глаз" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {content.hall.layouts.map((l) => (
-            <NeedsData key={l.id} on={!!("needsData" in l && l.needsData)} className="card !p-4">
+            <NeedsData key={l.id} on={!!("needsData" in l && l.needsData)} className="card flex h-full flex-col !p-4">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-cardSm bg-white">
                 {l.scheme ? (
                   <Zoom src={l.scheme} alt={`Схема рассадки: ${l.name}`} imgClassName="h-full w-full object-contain p-2" />
@@ -172,15 +172,15 @@ export function SeatingSchemes() {
                 )}
               </div>
               <div className="mt-4 flex items-baseline justify-between gap-3">
-                <h3>{l.name}</h3>
-                <span className="whitespace-nowrap text-2xl font-medium tabular-nums">до {l.capacity}</span>
+                <h3 className="leading-snug">{l.name}</h3>
+                <span className="shrink-0 whitespace-nowrap text-2xl font-medium tabular-nums">до {l.capacity}</span>
               </div>
-              <p className="mt-1 text-sm text-dim">{l.note}</p>
+              <p className="mt-2 text-sm text-dim">{l.note}</p>
             </NeedsData>
           ))}
         </div>
         {extra?.length ? (
-          <p className="mt-5 text-sm text-dim">Компактные варианты банкета: {extra.map((e) => `${e.name} — до ${e.capacity}`).join("; ")}.</p>
+          <p className="mt-5 text-sm text-dim">Ещё две официальные схемы для деловых событий: {extra.map((e) => `${e.name} — до ${e.capacity}`).join("; ")}.</p>
         ) : null}
       </div>
     </section>
@@ -300,8 +300,8 @@ export function TeamBuilding() {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3">
-          <PhotoSlot src="/img/park-shooting.jpg" alt="Стрелковый клуб Парка Патриот" />
-          <PhotoSlot src="/img/park-firetag.jpg" alt="Фаертаг в Парке Патриот" />
+          <PhotoSlot src="/img/park-shooting.jpg" alt="Стрельба в тире Парка «Патриот»" placeholder={false} />
+          <PhotoSlot src="/img/park-firetag.jpg" alt="Фаертаг в Парке «Патриот»" placeholder={false} />
         </div>
       </div>
     </section>
