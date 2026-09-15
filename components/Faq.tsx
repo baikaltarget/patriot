@@ -10,9 +10,9 @@ export default function Faq({ items, title = "Вопросы и ответы" }:
       <div className="wrap">
         <JsonLd data={faqLd(items)} />
         <h2 className="mb-6">{title}</h2>
-        <div className="max-w-3xl border-t border-ink">
+        <div className="grid max-w-3xl gap-3">
           {items.map((it) => (
-            <NeedsData key={it.q} on={!!it.needsData} as="div" className="border-b border-line">
+            <NeedsData key={it.q} on={!!it.needsData} as="div" className="rounded-cardSm bg-chalk px-5">
               <details className="group">
                 <summary className="flex cursor-pointer list-none items-baseline justify-between gap-6 py-4 font-medium">
                   <span>{it.q}</span>

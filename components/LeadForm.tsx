@@ -52,7 +52,7 @@ export default function LeadForm({
 
   return (
     <section id="zayavka" className="scroll-mt-20">
-      <div className={`border border-ink bg-paper ${compact ? "p-5" : "p-6 md:p-10"}`}>
+      <div className={`rounded-card bg-chalk ${compact ? "p-5" : "p-6 md:p-10"}`}>
         <h2 className="mb-1">{title}</h2>
         <p className="mb-6 max-w-[60ch] text-dim">{subtitle}</p>
         {status === "ok" ? (
@@ -61,34 +61,34 @@ export default function LeadForm({
           <form onSubmit={submit} className="grid gap-4 md:grid-cols-2">
             <label className="grid gap-1 text-sm">
               Мероприятие
-              <select value={values.event} onChange={(e) => set("event", e.target.value)} className="border border-line bg-paper p-3 text-base">
+              <select value={values.event} onChange={(e) => set("event", e.target.value)} className="border border-line bg-white p-3 text-base">
                 <option value="">Выберите формат</option>
                 {eventTypes.map((t) => <option key={t}>{t}</option>)}
               </select>
             </label>
             <label className="grid gap-1 text-sm">
               Дата или месяц
-              <input value={values.date} onChange={(e) => set("date", e.target.value)} placeholder="12 декабря или «в марте»" className="border border-line bg-paper p-3 text-base" />
+              <input value={values.date} onChange={(e) => set("date", e.target.value)} placeholder="12 декабря или «в марте»" className="border border-line bg-white p-3 text-base" />
             </label>
             <label className="grid gap-1 text-sm">
               Количество участников
-              <input value={values.guests} onChange={(e) => set("guests", e.target.value)} inputMode="numeric" placeholder="120" className="border border-line bg-paper p-3 text-base" />
+              <input value={values.guests} onChange={(e) => set("guests", e.target.value)} inputMode="numeric" placeholder="120" className="border border-line bg-white p-3 text-base" />
             </label>
             <label className="grid gap-1 text-sm">
               Компания
-              <input value={values.company} onChange={(e) => set("company", e.target.value)} className="border border-line bg-paper p-3 text-base" />
+              <input value={values.company} onChange={(e) => set("company", e.target.value)} className="border border-line bg-white p-3 text-base" />
             </label>
             <label className="grid gap-1 text-sm">
               Как к вам обращаться
-              <input value={values.name} onChange={(e) => set("name", e.target.value)} className="border border-line bg-paper p-3 text-base" />
+              <input value={values.name} onChange={(e) => set("name", e.target.value)} className="border border-line bg-white p-3 text-base" />
             </label>
             <label className="grid gap-1 text-sm">
               Телефон
-              <input required value={values.phone} onChange={(e) => set("phone", e.target.value)} type="tel" placeholder="+7 " className="border border-line bg-paper p-3 text-base" />
+              <input required value={values.phone} onChange={(e) => set("phone", e.target.value)} type="tel" placeholder="+7 " className="border border-line bg-white p-3 text-base" />
             </label>
             <label className="grid gap-1 text-sm md:col-span-2">
               Что важно знать
-              <textarea value={values.comment} onChange={(e) => set("comment", e.target.value)} rows={3} placeholder="Нужен звук и проектор, кофе-брейк на 100 человек, заезд накануне" className="border border-line bg-paper p-3 text-base" />
+              <textarea value={values.comment} onChange={(e) => set("comment", e.target.value)} rows={3} placeholder="Нужен звук и проектор, кофе-брейк на 100 человек, заезд накануне" className="border border-line bg-white p-3 text-base" />
             </label>
             <input tabIndex={-1} autoComplete="off" value={values.website} onChange={(e) => set("website", e.target.value)} className="hidden" aria-hidden />
             <label className="flex items-start gap-2 text-sm text-dim md:col-span-2">

@@ -16,7 +16,7 @@ export default function PhotoSlot({
 }) {
   return (
     <NeedsData on={placeholder} photo className={className}>
-      <figure className="relative w-full overflow-hidden bg-chalk" style={{ aspectRatio: ratio }}>
+      <figure className="relative w-full overflow-hidden rounded-card bg-chalk" style={{ aspectRatio: ratio }}>
         {placeholder ? (
           <div className="absolute inset-0 flex items-end p-3">
             <span className="dimension">{src.replace("/img/", "img/")}</span>

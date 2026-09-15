@@ -65,8 +65,8 @@ export default function Calculator() {
   const steps = ["Формат", "Участники", "Длительность", "Оборудование", "Расчёт"];
 
   return (
-    <div className="border border-ink bg-paper">
-      <ol className="flex border-b border-line text-sm" aria-label="Шаги расчёта">
+    <div className="overflow-hidden rounded-card bg-chalk">
+      <ol className="flex bg-white/60 text-sm" aria-label="Шаги расчёта">
         {steps.map((name, i) => (
           <li key={name} className={`flex-1 px-3 py-2 ${i === step ? "bg-ink text-paper" : i < step ? "text-ink" : "text-dim"}`}>
             <span className="font-mono">{i + 1}</span> <span className="hidden sm:inline">{name}</span>
@@ -80,7 +80,7 @@ export default function Calculator() {
             <h3 className="mb-4">Что за мероприятие?</h3>
             <div className="grid gap-2 sm:grid-cols-2">
               {formats.map((f) => (
-                <button key={f.id} type="button" onClick={() => pickFormat(f.id)} className="border border-line p-4 text-left hover:border-ink">
+                <button key={f.id} type="button" onClick={() => pickFormat(f.id)} className="rounded-cardSm bg-white p-4 text-left ring-1 ring-transparent hover:ring-ink">
                   {f.name}
                 </button>
               ))}
@@ -108,7 +108,7 @@ export default function Calculator() {
             <h3 className="mb-4">Сколько времени нужен зал?</h3>
             <div className="grid gap-2">
               {p.tariffs.map((t) => (
-                <label key={t.id} className={`flex cursor-pointer items-center justify-between gap-4 border p-4 ${duration === t.id ? "border-ink bg-chalk" : "border-line"}`}>
+                <label key={t.id} className={`flex cursor-pointer items-center justify-between gap-4 rounded-cardSm bg-white p-4 ring-1 ${duration === t.id ? "ring-ink" : "ring-transparent"}`}>
                   <span className="flex items-center gap-3">
                     <input type="radio" name="dur" checked={duration === t.id} onChange={() => setDuration(t.id as Duration)} />
                     <span>{t.name}<span className="block text-sm text-dim">{t.unit}</span></span>
@@ -116,14 +116,14 @@ export default function Calculator() {
                   <span className="font-mono">{fmt(t.price)}</span>
                 </label>
               ))}
-              <label className={`flex cursor-pointer items-center justify-between gap-4 border p-4 ${duration === "hourly" ? "border-ink bg-chalk" : "border-line"}`}>
+              <label className={`flex cursor-pointer items-center justify-between gap-4 rounded-cardSm bg-white p-4 ring-1 ${duration === "hourly" ? "ring-ink" : "ring-transparent"}`}>
                 <span className="flex items-center gap-3">
                   <input type="radio" name="dur" checked={duration === "hourly"} onChange={() => setDuration("hourly")} />
                   <span>По часам<span className="block text-sm text-dim">короткие встречи и мастер-классы</span></span>
                 </span>
                 <span className="flex items-center gap-2 font-mono">
                   {duration === "hourly" && (
-                    <input type="number" min={1} max={9} value={hours} onChange={(e) => setHours(+e.target.value)} className="w-14 border border-line bg-paper p-1 text-center" aria-label="Часов" />
+                    <input type="number" min={1} max={9} value={hours} onChange={(e) => setHours(+e.target.value)} className="w-14 border border-line bg-white p-1 text-center" aria-label="Часов" />
                   )}
                   {fmt(p.hourly.price)}/ч
                 </span>
@@ -141,13 +141,13 @@ export default function Calculator() {
             <h3 className="mb-4">Что из оборудования и помещений нужно?</h3>
             <div className="grid gap-2 sm:grid-cols-2">
               {p.extras.map((e) => (
-                <label key={e.id} className={`flex cursor-pointer items-center justify-between border p-4 ${extras.includes(e.id) ? "border-ink bg-chalk" : "border-line"}`}>
+                <label key={e.id} className={`flex cursor-pointer items-center justify-between rounded-cardSm bg-white p-4 ring-1 ${extras.includes(e.id) ? "ring-ink" : "ring-transparent"}`}>
                   <span className="flex items-center gap-3"><input type="checkbox" checked={extras.includes(e.id)} onChange={() => toggle(extras, e.id, setExtras)} />{e.name}</span>
                   <span className="font-mono">{fmt(e.price)}</span>
                 </label>
               ))}
               {p.roomsHourly.map((r) => (
-                <label key={r.id} className={`flex cursor-pointer items-center justify-between border p-4 ${rooms.includes(r.id) ? "border-ink bg-chalk" : "border-line"}`}>
+                <label key={r.id} className={`flex cursor-pointer items-center justify-between rounded-cardSm bg-white p-4 ring-1 ${rooms.includes(r.id) ? "ring-ink" : "ring-transparent"}`}>
                   <span className="flex items-center gap-3"><input type="checkbox" checked={rooms.includes(r.id)} onChange={() => toggle(rooms, r.id, setRooms)} />{r.name}</span>
                   <span className="font-mono">{fmt(r.price)}/ч</span>
                 </label>
@@ -156,7 +156,7 @@ export default function Calculator() {
             {rooms.length > 0 && (
               <label className="mt-3 flex items-center gap-3 text-sm">
                 Часов для доп. помещений
-                <input type="number" min={1} max={20} value={roomsHours} onChange={(e) => setRoomsHours(+e.target.value)} className="w-16 border border-line bg-paper p-1 text-center font-mono" />
+                <input type="number" min={1} max={20} value={roomsHours} onChange={(e) => setRoomsHours(+e.target.value)} className="w-16 border border-line bg-white p-1 text-center font-mono" />
               </label>
             )}
             <div className="mt-6 flex gap-2">
@@ -183,14 +183,14 @@ export default function Calculator() {
               </p>
               <button type="button" onClick={() => setStep(0)} className="btn-ghost mt-4">Посчитать заново</button>
             </div>
-            <div className="border-t border-line pt-6 md:border-l md:border-t-0 md:pl-8 md:pt-0">
+            <div className="rounded-cardSm bg-white p-6">
               {sent === "ok" ? (
                 <p className="text-lg">Расчёт отправлен менеджеру. Перезвоним на {phone} и проверим дату.</p>
               ) : (
                 <>
                   <h3 className="mb-1">Закрепить дату</h3>
                   <p className="mb-4 text-sm text-dim">Пришлём этот расчёт и проверим, свободен ли зал.</p>
-                  <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+7 " className="mb-2 w-full border border-line bg-paper p-3" aria-label="Телефон" />
+                  <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+7 " className="mb-2 w-full border border-line bg-white p-3" aria-label="Телефон" />
                   <button type="button" onClick={send} disabled={sent === "sending" || !phone} className="btn-signal w-full">
                     {sent === "sending" ? "Отправляем" : "Отправить расчёт"}
                   </button>

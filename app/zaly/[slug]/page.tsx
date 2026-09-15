@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <div>
           <h1>{h.h1}</h1>
           <p className="mt-5 max-w-[52ch] text-lg text-dim">{h.intro}</p>
-          <dl className="mt-6 grid grid-cols-3 gap-4 border-y border-ink py-4">
+          <dl className="card mt-6 grid grid-cols-3 gap-4">
             <div><dt className="text-sm text-dim">Площадь</dt><dd className="font-mono text-xl">{h.area} м²</dd></div>
             <div><dt className="text-sm text-dim">Потолок</dt><dd className="font-mono text-xl">{h.height} м</dd></div>
             <div><dt className="text-sm text-dim">Вместимость</dt><dd className="font-mono text-xl">{h.capacity}</dd></div>

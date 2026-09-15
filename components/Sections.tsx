@@ -4,7 +4,31 @@ import NeedsData from "./NeedsData";
 import PhotoSlot from "./PhotoSlot";
 import { caseEstimate, content, fmt, layoutName } from "@/lib/content";
 
-/** Первый экран посадочной: заголовок слева, живое фото справа. */
+function Arrow({ className = "" }: { className?: string }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M7 17L17 7M9 7h8v8" />
+    </svg>
+  );
+}
+
+/** Заголовок секции: лейбл слева, заголовок справа. Часть заголовка можно приглушить через muted. */
+export function SectionHead({ label, title, muted, right }: { label: string; title: string; muted?: string; right?: React.ReactNode }) {
+  return (
+    <div className="sec-head">
+      <div className="label">{label}</div>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <h2 className="max-w-[24ch]">
+          {title}
+          {muted && <> <span className="muted">{muted}</span></>}
+        </h2>
+        {right}
+      </div>
+    </div>
+  );
+}
+
+/** Первый экран: фото на всю ширину контейнера, тёмный градиент, текст поверх. */
 export function Hero({
   h1,
   lead,
@@ -24,45 +48,60 @@ export function Hero({
 }) {
   const s = content.site;
   return (
-    <section className="wrap grid items-center gap-10 py-10 md:grid-cols-[1.05fr_1fr] md:py-16">
-      <div>
-        <h1>{h1}</h1>
-        <p className="mt-5 max-w-[56ch] text-lg text-dim md:text-xl">{lead}</p>
-        {priceFrom !== undefined && (
-          <p className="mt-6 flex items-baseline gap-3">
-            <span className="whitespace-nowrap text-3xl font-bold tabular-nums">от {fmt(priceFrom)}</span>
-            <span className="text-dim">{priceUnit}</span>
-          </p>
-        )}
-        <div className="mt-7 flex flex-wrap gap-3">
-          <a href="#zayavka" className="btn-signal">{cta}</a>
-          <a href={`tel:${s.phoneRaw}`} className="btn-ghost">{s.phone}</a>
-          {secondary && <Link href={secondary.href} className="btn-ghost">{secondary.label}</Link>}
+    <section className="wrap py-5 md:py-6">
+      <div className="relative overflow-hidden rounded-card bg-ink text-white">
+        <img src={image.src} alt={image.alt} className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/15" aria-hidden />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent" aria-hidden />
+        <div className="relative z-10 flex min-h-[520px] flex-col justify-center p-7 md:min-h-[600px] md:p-14">
+          <div className="max-w-[620px]">
+            <h1 className="text-white">{h1}</h1>
+            <p className="mt-5 max-w-[52ch] text-[17px] text-white/85 md:text-lg">{lead}</p>
+            {priceFrom !== undefined && (
+              <p className="mt-6 flex items-baseline gap-3">
+                <span className="whitespace-nowrap text-3xl font-medium tabular-nums">от {fmt(priceFrom)}</span>
+                <span className="text-white/75">{priceUnit}</span>
+              </p>
+            )}
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href="#zayavka" className="btn-signal">{cta} <Arrow /></a>
+              <a href={`tel:${s.phoneRaw}`} className="btn-white">{s.phone}</a>
+              {secondary && <Link href={secondary.href} className="btn-white md:hidden">{secondary.label}</Link>}
+            </div>
+          </div>
         </div>
+        {secondary && (
+          <Link href={secondary.href} className="absolute bottom-8 right-8 z-10 hidden min-w-[200px] rounded-card bg-white p-5 pb-16 pr-8 text-ink no-underline transition-transform hover:-translate-y-0.5 md:block">
+            <span className="block text-[17px] font-medium leading-snug">{secondary.label}</span>
+            <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-ink text-white"><Arrow /></span>
+          </Link>
+        )}
       </div>
-      <PhotoSlot src={image.src} alt={image.alt} ratio="4/3" placeholder={false} />
     </section>
   );
 }
 
-/** Полоса характеристик — официальные цифры площадки. */
+/** Официальные цифры площадки — карточки с крупным числом. */
 export function SpecStrip() {
   const h = content.hall;
   const items = [
-    { v: `${h.area} м²`, l: "площадь зала" },
-    { v: `${h.height} м`, l: "высота потолка" },
-    { v: `${h.stageArea} м²`, l: "сцена" },
-    { v: `${h.capacityMax}`, l: "мест театром" },
-    { v: "70", l: "мест классом" },
-    { v: "68 + 46 м²", l: "малый зал и переговорная" },
+    { v: `${h.area}`, u: "м²", l: "площадь большого зала" },
+    { v: `${h.capacityMax}`, u: "мест", l: "театром по официальной схеме" },
+    { v: "96", u: "мест", l: "банкетом за круглыми столами" },
+    { v: "70", u: "мест", l: "классом, столы рядами" },
+    { v: `${h.height}`, u: "м", l: "высота потолка, подвес света" },
+    { v: `${h.stageArea}`, u: "м²", l: "сцена 7,5 × 4 м" },
   ];
   return (
-    <section className="border-y-2 border-ink">
-      <div className="wrap grid grid-cols-2 md:grid-cols-6">
+    <section className="wrap section pt-2 md:pt-4">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
         {items.map((it) => (
-          <div key={it.l} className="border-l border-line py-5 pl-4 pr-3 odd:border-l-0 odd:pl-0 md:odd:border-l md:odd:pl-4 md:first:border-l-0 md:first:pl-0">
-            <div className="font-mono text-2xl font-bold tabular-nums">{it.v}</div>
-            <div className="text-sm text-dim">{it.l}</div>
+          <div key={it.l} className="card flex min-h-[170px] flex-col justify-between">
+            <div className="flex items-baseline gap-2">
+              <span className="text-4xl font-medium tabular-nums md:text-5xl">{it.v}</span>
+              <span className="text-lg text-dim">{it.u}</span>
+            </div>
+            <div className="mt-6 text-[15px] text-dim">{it.l}</div>
           </div>
         ))}
       </div>
@@ -70,17 +109,17 @@ export function SpecStrip() {
   );
 }
 
-/** Два-четыре смысловых блока текста, без карточек. */
-export function Blocks({ title, items, cols = 2 }: { title?: string; items: { t: string; d: string; needsData?: boolean }[]; cols?: 2 | 3 | 4 }) {
+/** Смысловые блоки — карточки на серой подложке. */
+export function Blocks({ title, items, cols = 2, label = "Преимущества" }: { title?: string; items: { t: string; d: string; needsData?: boolean }[]; cols?: 2 | 3 | 4; label?: string }) {
   return (
     <section className="section">
       <div className="wrap">
-        {title && <h2 className="mb-8">{title}</h2>}
-        <div className={`grid gap-x-10 gap-y-8 ${cols === 4 ? "md:grid-cols-2 lg:grid-cols-4" : cols === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
+        {title && <SectionHead label={label} title={title} />}
+        <div className={`grid gap-4 ${cols === 4 ? "md:grid-cols-2 lg:grid-cols-4" : cols === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
           {items.map((it) => (
-            <NeedsData key={it.t} on={!!it.needsData} className="border-t-2 border-ink pt-4">
-              <h3 className="mb-2">{it.t}</h3>
-              <p className="max-w-[52ch] text-dim">{it.d}</p>
+            <NeedsData key={it.t} on={!!it.needsData} className="card">
+              <h3 className="mb-3">{it.t}</h3>
+              <p className="text-[15px] text-dim">{it.d}</p>
             </NeedsData>
           ))}
         </div>
@@ -89,18 +128,12 @@ export function Blocks({ title, items, cols = 2 }: { title?: string; items: { t:
   );
 }
 
-/** Живая галерея — реальные фото зала и мероприятий. */
-export function Gallery({
-  title = "Как выглядит зал",
-  images,
-}: {
-  title?: string;
-  images: { src: string; alt: string }[];
-}) {
+/** Живая галерея. */
+export function Gallery({ title = "Как выглядит зал", images }: { title?: string; images: { src: string; alt: string }[] }) {
   return (
     <section className="section pt-0">
       <div className="wrap">
-        <h2 className="mb-6">{title}</h2>
+        <SectionHead label="Фото" title={title} />
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {images.map((img, i) => (
             <PhotoSlot key={img.src} src={img.src} alt={img.alt} ratio="4/3" placeholder={false} className={i === 0 ? "col-span-2 row-span-2" : ""} />
@@ -111,70 +144,72 @@ export function Gallery({
   );
 }
 
-/** Вместимость по официальным схемам рассадки площадки — не чертёж, а факты + подлинные схемы. */
+/** Вместимость по официальным схемам. */
 export function SeatingSchemes() {
   const extra = content.hall.layoutsExtra;
   return (
-    <section className="section bg-chalk">
+    <section className="section">
       <div className="wrap">
-        <h2 className="mb-2">Вместимость по официальным схемам</h2>
-        <p className="mb-8 max-w-[62ch] text-dim">
-          Это не оценка на глаз — цифры и схемы ниже подготовлены площадкой и совпадут с тем, что пришлёт менеджер при бронировании.
-        </p>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <SectionHead label="Вместимость" title="По официальным схемам рассадки," muted="а не на глаз" />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {content.hall.layouts.map((l) => (
-            <NeedsData key={l.id} on={!!l.needsData}>
-              <div className="aspect-[4/3] w-full overflow-hidden border-2 border-ink bg-white">
+            <NeedsData key={l.id} on={!!l.needsData} className="card !p-4">
+              <div className="aspect-[4/3] w-full overflow-hidden rounded-cardSm bg-white">
                 {l.scheme ? (
                   <Image src={l.scheme} alt={`Схема рассадки: ${l.name}`} width={640} height={480} className="h-full w-full object-contain p-2" />
                 ) : (
                   <div className="flex h-full items-center justify-center p-4 text-center text-sm text-dim">Официальной схемы для этого формата нет</div>
                 )}
               </div>
-              <div className="mt-3 flex items-baseline justify-between">
+              <div className="mt-4 flex items-baseline justify-between gap-3">
                 <h3>{l.name}</h3>
-                <span className="font-mono font-bold">до {l.capacity}</span>
+                <span className="whitespace-nowrap text-2xl font-medium tabular-nums">до {l.capacity}</span>
               </div>
               <p className="mt-1 text-sm text-dim">{l.note}</p>
             </NeedsData>
           ))}
         </div>
         {extra?.length ? (
-          <p className="mt-6 text-sm text-dim">
-            Компактные варианты банкета: {extra.map((e) => `${e.name} — до ${e.capacity}`).join("; ")}.
-          </p>
+          <p className="mt-5 text-sm text-dim">Компактные варианты банкета: {extra.map((e) => `${e.name} — до ${e.capacity}`).join("; ")}.</p>
         ) : null}
       </div>
     </section>
   );
 }
 
+/** Залы — фото-карточки с названием и ценой поверх снимка. */
 export function HallList({ title = "Три помещения" }: { title?: string }) {
   return (
     <section className="section">
       <div className="wrap">
-        <div className="mb-8 flex items-baseline justify-between gap-6">
-          <h2>{title}</h2>
-          <Link href="/zaly/" className="text-brandBlue hover:underline">Все залы</Link>
-        </div>
-        <div className="grid gap-8 md:grid-cols-3">
-          {content.halls.map((h, i) => {
-            const img = h.slug === "multihall" ? "/img/hall-01.jpg" : null;
-            return (
-              <Link key={h.slug} href={`/zaly/${h.slug}/`} className="loc-card group">
-                {img ? (
-                  <figure><img src={img} alt={h.name} /></figure>
-                ) : (
-                  <PhotoSlot src={`/img/${h.slug}-01.jpg`} alt={h.name} ratio="4/3" />
-                )}
-                <div className="mt-3 flex items-baseline justify-between text-sm text-dim">
-                  <span className="font-mono">{h.area} м²</span>
-                  <span>{h.capacity}</span>
+        <SectionHead label="Залы" title={title} right={<Link href="/zaly/" className="btn-ghost !py-2">Все залы <Arrow /></Link>} />
+        <div className="grid gap-4 md:grid-cols-3 md:grid-rows-2">
+          {content.halls.map((h) => {
+            const big = h.slug === "multihall";
+            return big ? (
+              <Link key={h.slug} href={`/zaly/${h.slug}/`} className="photo-card aspect-[4/5] md:col-span-2 md:row-span-2 md:aspect-auto md:min-h-[520px]">
+                <img src="/img/hall-01.jpg" alt={h.name} />
+                <div className="shade" />
+                <div className="body">
+                  <div className="text-sm text-white/75">{h.area} м² · {h.capacity}</div>
+                  <h3 className="mt-1 text-2xl text-white md:text-3xl">{h.name}</h3>
+                  <span className="price-pill mt-4">от {fmt(h.priceFrom)}</span>
                 </div>
-                <h3 className="mt-1 group-hover:underline">{h.name}</h3>
-                <p>{h.short}</p>
-                <p className="mt-3 font-bold text-ink">от {fmt(h.priceFrom)} {h.priceUnit}</p>
               </Link>
+            ) : (
+              <NeedsData key={h.slug} on={!!("needsData" in h && h.needsData)}>
+                <Link href={`/zaly/${h.slug}/`} className="card flex h-full min-h-[240px] flex-col justify-between no-underline">
+                  <div>
+                    <div className="text-sm text-dim">{h.area} м² · {h.capacity}</div>
+                    <h3 className="mt-1">{h.name}</h3>
+                    <p className="mt-2 text-[15px] text-dim">{h.short}</p>
+                  </div>
+                  <div className="mt-6 flex items-center justify-between">
+                    <span className="price-pill">от {fmt(h.priceFrom)} / ч</span>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-white"><Arrow /></span>
+                  </div>
+                </Link>
+              </NeedsData>
             );
           })}
         </div>
@@ -185,26 +220,30 @@ export function HallList({ title = "Три помещения" }: { title?: stri
 
 export function FormatList({ title = "Под какое мероприятие", exclude }: { title?: string; exclude?: string }) {
   const landing = [
-    { name: "Конференции и форумы", href: "/konferenc-zal/", note: "до 175 участников театром, экран, звук, секции в малом зале" },
-    { name: "Корпоративы и тимбилдинг", href: "/korporativ/", note: "до 96 гостей за столами, тир и фаертаг рядом" },
-    { name: "Концерты, выставки, съёмки", href: "/ploshchadka/", note: "сцена 30 м², подвес света, потолки 6 м" },
+    { name: "Конференции и форумы", href: "/konferenc-zal/", note: "до 175 участников театром, экран, звук, секции в малом зале", img: "/img/conf-01.jpg" },
+    { name: "Корпоративы и тимбилдинг", href: "/korporativ/", note: "до 96 гостей за столами, тир и фаертаг рядом", img: "/img/koncert-01.jpg" },
+    { name: "Концерты, выставки, съёмки", href: "/ploshchadka/", note: "сцена 30 м², подвес света, потолки 6 м", img: "/img/koncert-02.jpg" },
   ];
   return (
-    <section className="section bg-chalk">
+    <section className="section">
       <div className="wrap">
-        <h2 className="mb-8">{title}</h2>
-        <div className="grid gap-6 md:grid-cols-3">
+        <SectionHead label="Форматы" title={title} />
+        <div className="grid gap-4 md:grid-cols-3">
           {landing.map((l) => (
-            <Link key={l.href} href={l.href} className="group border-t-2 border-ink pt-4 no-underline">
-              <h3 className="group-hover:underline">{l.name}</h3>
-              <p className="mt-1 text-sm text-dim">{l.note}</p>
+            <Link key={l.href} href={l.href} className="photo-card aspect-[4/3]">
+              <img src={l.img} alt={l.name} />
+              <div className="shade" />
+              <div className="body">
+                <h3 className="text-xl text-white">{l.name}</h3>
+                <p className="mt-1 text-sm text-white/80">{l.note}</p>
+              </div>
             </Link>
           ))}
         </div>
-        <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-[15px]">
+        <ul className="mt-6 flex flex-wrap gap-2">
           {content.formats.filter((f) => f.slug !== exclude).map((f) => (
             <li key={f.slug}>
-              <Link href={`/format/${f.slug}/`} className="text-dim hover:text-brandBlue">{f.name}</Link>
+              <Link href={`/format/${f.slug}/`} className="inline-block rounded-pill border border-line px-4 py-2 text-[15px] no-underline hover:border-ink">{f.name}</Link>
             </li>
           ))}
         </ul>
@@ -221,23 +260,20 @@ export function CaseList({ title = "Проведённые мероприяти�
   return (
     <section className="section">
       <div className="wrap">
-        <div className="mb-8 flex items-baseline justify-between gap-6">
-          <h2>{title}</h2>
-          <Link href="/meropriyatiya/" className="text-brandBlue hover:underline">Все мероприятия</Link>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <SectionHead label="Примеры" title={title} right={<Link href="/meropriyatiya/" className="btn-ghost !py-2">Все мероприятия <Arrow /></Link>} />
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {cases.map((c) => {
             const e = caseEstimate(c);
             return (
-              <NeedsData key={c.slug} on={!!c.needsData}>
-                <Link href={`/meropriyatiya/${c.slug}/`} className="group block border-t-2 border-ink pt-4 no-underline">
+              <NeedsData key={c.slug} on={!!c.needsData} className="card flex flex-col">
+                <Link href={`/meropriyatiya/${c.slug}/`} className="group flex h-full flex-col no-underline">
                   <div className="flex items-baseline justify-between text-sm text-dim">
                     <span>{c.format} · {layoutName(c.layout)}</span>
                     <span className="font-mono">{c.guests} чел.</span>
                   </div>
-                  <h3 className="mt-2 group-hover:underline">{c.name}</h3>
-                  <p className="mt-2 text-sm text-dim">{c.summary}</p>
-                  <p className="mt-3 font-mono font-bold">{fmt(e.total)} <span className="text-sm font-normal text-dim">за площадку</span></p>
+                  <h3 className="mt-3 group-hover:underline">{c.name}</h3>
+                  <p className="mt-2 flex-1 text-[15px] text-dim">{c.summary}</p>
+                  <p className="mt-5 text-2xl font-medium tabular-nums">{fmt(e.total)} <span className="text-sm font-normal text-dim">за площадку</span></p>
                 </Link>
               </NeedsData>
             );
@@ -251,16 +287,17 @@ export function CaseList({ title = "Проведённые мероприяти�
 export function TeamBuilding() {
   const s = content.site;
   return (
-    <section className="section bg-footer text-white">
-      <div className="wrap grid gap-10 md:grid-cols-2">
+    <section className="wrap section">
+      <div className="grid gap-8 rounded-card bg-footer p-7 text-white md:grid-cols-2 md:p-12">
         <div>
-          <h2>Тимбилдинг рядом с залом</h2>
+          <div className="text-[15px] text-white/55">Тимбилдинг</div>
+          <h2 className="mt-2 text-white">Стрельба и фаертаг <span className="text-white/55">рядом с залом</span></h2>
           <p className="mt-4 max-w-[52ch] text-white/75">
             Стрелковый клуб, фаертаг, тактический центр и бомбоубежище — всё на территории парка. Команды соревнуются днём, банкет вечером, переездов нет.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href={`${s.parentUrl}shooting`} className="btn border-2 border-white text-white hover:bg-white hover:text-footer">Стрелковый клуб</a>
-            <a href={`${s.parentUrl}firetag`} className="btn border-2 border-white text-white hover:bg-white hover:text-footer">Фаертаг</a>
+            <a href={`${s.parentUrl}shooting`} className="btn-white">Стрелковый клуб <Arrow /></a>
+            <a href={`${s.parentUrl}firetag`} className="btn border border-white/40 text-white hover:bg-white/10">Фаертаг</a>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3">
@@ -272,25 +309,19 @@ export function TeamBuilding() {
   );
 }
 
-/** Карточки-локации в фирменном стиле park-patriot.com: фото, заголовок, текст, красная кнопка. */
-export function LocationCards({
-  title,
-  items,
-}: {
-  title?: string;
-  items: { image: string; alt: string; name: string; description: string; href: string }[];
-}) {
+/** Карточки-локации: фото, заголовок, текст, кнопка. Оставлено для совместимости. */
+export function LocationCards({ title, items }: { title?: string; items: { image: string; alt: string; name: string; description: string; href: string }[] }) {
   return (
     <section className="section">
       <div className="wrap">
-        {title && <h2 className="mb-8">{title}</h2>}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {title && <SectionHead label="Локации" title={title} />}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((it) => (
-            <div key={it.href} className="loc-card">
-              <figure><img src={it.image} alt={it.alt} /></figure>
-              <h3>{it.name}</h3>
-              <p>{it.description}</p>
-              <Link href={it.href} className="btn-signal mt-4 self-start">Узнать подробнее</Link>
+            <div key={it.href} className="card flex flex-col !p-4">
+              <div className="aspect-[4/3] overflow-hidden rounded-cardSm"><img src={it.image} alt={it.alt} className="h-full w-full object-cover" /></div>
+              <h3 className="mt-4">{it.name}</h3>
+              <p className="mt-2 flex-1 text-[15px] text-dim">{it.description}</p>
+              <Link href={it.href} className="btn-signal mt-4 self-start">Узнать подробнее <Arrow /></Link>
             </div>
           ))}
         </div>

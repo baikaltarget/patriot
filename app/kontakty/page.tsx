@@ -38,7 +38,7 @@ export default function Page() {
         </div>
         <NeedsData className="min-h-[360px]">
           {/* Карта: вставить iframe Яндекс Карт (Конструктор карт -> код) вместо этого блока */}
-          <div className="flex h-full min-h-[360px] items-center justify-center bg-chalk p-6 text-center text-dim">
+          <div className="flex h-full min-h-[360px] items-center justify-center rounded-card bg-chalk p-6 text-center text-dim">
             Сюда вставляется карта Яндекс с меткой Мультихолла и парковки. Код — из Конструктора карт Яндекса.
           </div>
         </NeedsData>

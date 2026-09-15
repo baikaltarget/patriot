@@ -46,7 +46,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <div>
           <h1>{f.h1}</h1>
           <p className="mt-5 max-w-[52ch] text-lg text-dim">{f.intro}</p>
-          <dl className="mt-6 grid gap-3 border-y border-ink py-4 sm:grid-cols-2">
+          <dl className="card mt-6 grid gap-3 sm:grid-cols-2">
             <div><dt className="text-sm text-dim">Рассадка</dt><dd className="font-medium">{layoutName(f.layout)}</dd></div>
             <div><dt className="text-sm text-dim">Обычно</dt><dd className="font-medium">{f.typicalGuests}</dd></div>
           </dl>
