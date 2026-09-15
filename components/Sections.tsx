@@ -53,8 +53,8 @@ export function Hero({
         <img src={image.src} alt={image.alt} className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/15" aria-hidden />
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent" aria-hidden />
-        <div className="relative z-10 flex min-h-[520px] flex-col justify-center p-7 md:min-h-[600px] md:p-14">
-          <div className="max-w-[620px]">
+        <div className="relative z-10 flex min-h-[520px] flex-col justify-center p-7 md:min-h-[640px] md:p-14 xl:p-16">
+          <div className="max-w-[680px]">
             <h1 className="text-white">{h1}</h1>
             <p className="mt-5 max-w-[52ch] text-[17px] text-white/85 md:text-lg">{lead}</p>
             {priceFrom !== undefined && (
