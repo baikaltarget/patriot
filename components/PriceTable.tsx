@@ -41,8 +41,8 @@ export default function PriceTable({ compact = false }: { compact?: boolean }) {
             ))}
             {p.roomsHourly.map((r) => (
               <tr key={r.id}>
-                <td><NeedsData on={!!r.needsData} as="span">{r.name}</NeedsData></td>
-                <td className="num"><NeedsData on={!!r.needsData} as="span">{fmt(r.price)} / ч</NeedsData></td>
+                <td>{r.name}</td>
+                <td className="num">{fmt(r.price)} / ч</td>
               </tr>
             ))}
             <tr><td>{p.cleaning.name}</td><td className="num">{fmt(p.cleaning.price)}</td></tr>

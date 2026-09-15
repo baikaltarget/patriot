@@ -26,6 +26,7 @@ export default function Calculator() {
   const [rooms, setRooms] = useState<string[]>([]);
   const [roomsHours, setRoomsHours] = useState(4);
   const [phone, setPhone] = useState("");
+  const [agree, setAgree] = useState(true);
   const [sent, setSent] = useState<"idle" | "sending" | "ok" | "notconfigured" | "error">("idle");
 
   const est = useMemo(
@@ -45,7 +46,7 @@ export default function Calculator() {
     set(arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
 
   async function send() {
-    if (!phone) return;
+    if (!phone || !agree) return;
     setSent("sending");
     const fname = formats.find((x) => x.id === format)?.name ?? "";
     const estimateText = `${est.lines.map((l) => `${l.name} — ${fmt(l.price)}`).join("; ")}; итого ${fmt(est.total)}`;
@@ -190,8 +191,12 @@ export default function Calculator() {
                 <>
                   <h3 className="mb-1">Закрепить дату</h3>
                   <p className="mb-4 text-sm text-dim">Пришлём этот расчёт и проверим, свободен ли зал.</p>
-                  <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+7 " className="mb-2 w-full border border-line bg-white p-3" aria-label="Телефон" />
-                  <button type="button" onClick={send} disabled={sent === "sending" || !phone} className="btn-signal w-full">
+                  <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+7 " className="mb-3 w-full border border-line bg-white p-3" aria-label="Телефон" />
+                  <label className="mb-3 flex items-start gap-2 text-sm text-dim">
+                    <input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} className="mt-1" />
+                    <span>Согласен на обработку персональных данных по <a href="/politika/" className="underline">политике</a>.</span>
+                  </label>
+                  <button type="button" onClick={send} disabled={sent === "sending" || !phone || !agree} className="btn-signal w-full">
                     {sent === "sending" ? "Отправляем" : "Отправить расчёт"}
                   </button>
                   {sent === "notconfigured" && <p className="mt-2 text-sm text-alert">Отправка ещё не настроена. Позвоните {s.phone}, расчёт сохранён в логе.</p>}
