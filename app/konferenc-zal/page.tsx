@@ -32,6 +32,7 @@ export default function Page() {
           { src: "/img/hall-03.jpg", alt: "Зал во время доклада с проекцией" },
           { src: "/img/vks-01.jpg", alt: "Видеоконференцсвязь на мероприятии в Мультихолле" },
           { src: "/img/format-class.jpg", alt: "Рассадка классом на турнире в Мультихолле" },
+          { src: "/img/conf-01.jpg", alt: "Деловой форум в Мультихолле" },
         ]}
       />
       <HallList title="Большой зал и малый зал" />

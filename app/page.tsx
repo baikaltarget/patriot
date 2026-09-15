@@ -33,6 +33,7 @@ export default function Home() {
           { src: "/img/hall-03.jpg", alt: "Мультихолл, зал во время мероприятия" },
           { src: "/img/conf-01.jpg", alt: "Панельная дискуссия в Мультихолле" },
           { src: "/img/koncert-01.jpg", alt: "Концертная программа на сцене Мультихолла" },
+          { src: "/img/conf-02.jpg", alt: "Панельная дискуссия в Мультихолле" },
         ]}
       />
       <HallList />

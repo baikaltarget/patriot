@@ -128,15 +128,25 @@ export function Blocks({ title, items, cols = 2, label = "Преимуществ
   );
 }
 
-/** Живая галерея. */
+/** Живая галерея. 5 фото — крупное слева + сетка справа; иначе ровная сетка без дыр. */
 export function Gallery({ title = "Как выглядит зал", images }: { title?: string; images: { src: string; alt: string }[] }) {
+  if (!images.length) return null;
+  const feature = images.length >= 5;
+  const shown = feature ? images.slice(0, 5) : images;
   return (
     <section className="section pt-0">
       <div className="wrap">
         <SectionHead label="Фото" title={title} />
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-          {images.map((img, i) => (
-            <PhotoSlot key={img.src} src={img.src} alt={img.alt} ratio="4/3" placeholder={false} className={i === 0 ? "col-span-2 row-span-2" : ""} />
+        <div className={`grid gap-4 ${feature ? "grid-cols-2 md:grid-cols-4" : shown.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-2 md:grid-cols-3"}`}>
+          {shown.map((img, i) => (
+            <PhotoSlot
+              key={img.src + i}
+              src={img.src}
+              alt={img.alt}
+              ratio="4/3"
+              placeholder={false}
+              className={feature && i === 0 ? "col-span-2 row-span-2" : ""}
+            />
           ))}
         </div>
       </div>

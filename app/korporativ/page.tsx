@@ -34,6 +34,7 @@ export default function Page() {
           { src: "/img/hall-02.jpg", alt: "Полный зал на мероприятии в Мультихолле" },
           { src: "/img/festival-01.jpg", alt: "Праздничная программа на сцене Мультихолла" },
           { src: "/img/koncert-01.jpg", alt: "Награждение с цветной подсветкой сцены" },
+          { src: "/img/kids-02.jpg", alt: "Праздничное мероприятие в Мультихолле" },
         ]}
       />
       <SeatingSchemes />

@@ -48,6 +48,7 @@ export default function Page() {
         images={[
           { src: "/img/koncert-01.jpg", alt: "Награждение на сцене с цветной подсветкой" },
           { src: "/img/hall-02.jpg", alt: "Полный зал на праздничном мероприятии" },
+          { src: "/img/koncert-02.jpg", alt: "Сцена с праздничным оформлением" },
         ]}
       />
       <Faq items={pg.faq} />

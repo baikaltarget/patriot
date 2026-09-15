@@ -33,6 +33,7 @@ export default function Page() {
           { src: "/img/festival-01.jpg", alt: "Праздничная программа на сцене" },
           { src: "/img/hall-02.jpg", alt: "Полный зал сверху" },
           { src: "/img/hall-03.jpg", alt: "Зал во время мероприятия с экраном" },
+          { src: "/img/koncert-02.jpg", alt: "Сцена с фирменным оформлением" },
         ]}
       />
       <section className="section bg-chalk">

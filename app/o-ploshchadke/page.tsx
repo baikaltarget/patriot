@@ -30,6 +30,7 @@ export default function Page() {
           { src: "/img/festival-01.jpg", alt: "Детский фестиваль на сцене Мультихолла" },
           { src: "/img/format-class.jpg", alt: "Турнир с рассадкой классом" },
           { src: "/img/kids-01.jpg", alt: "Детский праздник в Мультихолле" },
+          { src: "/img/kids-02.jpg", alt: "Детское мероприятие в Мультихолле" },
         ]}
       />
       <HallList />
