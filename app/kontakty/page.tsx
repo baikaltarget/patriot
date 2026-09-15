@@ -31,10 +31,10 @@ export default function Page() {
               </NeedsData>
             ))}
           </div>
-          <NeedsData className="mt-8 text-sm text-dim">
+          <div className="mt-8 text-sm text-dim">
             <div className="font-medium text-ink">Реквизиты для договора</div>
             {s.legal.org}<br />ИНН {s.legal.inn}, ОГРН {s.legal.ogrn}<br />{s.postalCode}, {s.address}
-          </NeedsData>
+          </div>
         </div>
         <NeedsData className="min-h-[360px]">
           {/* Карта: вставить iframe Яндекс Карт (Конструктор карт -> код) вместо этого блока */}
