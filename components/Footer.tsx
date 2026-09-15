@@ -5,7 +5,7 @@ import { content } from "@/lib/content";
 export default function Footer() {
   const s = content.site;
   return (
-    <footer className="mt-6 rounded-t-card bg-footer pb-24 pt-14 text-white md:pb-14">
+    <footer className="mt-6 rounded-t-card bg-footer pb-14 pt-14 text-white">
       <div className="wrap grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div>
           <img src={s.logo.white} alt={s.parentName} width={168} height={72} className="h-12 w-auto" />

@@ -53,17 +53,17 @@ export function Hero({
         <img src={image.src} alt={image.alt} className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/15" aria-hidden />
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent" aria-hidden />
-        <div className="relative z-10 flex min-h-[520px] flex-col justify-center p-7 md:min-h-[640px] md:p-14 xl:p-16">
+        <div className="relative z-10 flex min-h-[440px] flex-col justify-center p-6 md:min-h-[640px] md:p-14 xl:p-16">
           <div className="max-w-[680px]">
             <h1 className="text-white">{h1}</h1>
-            <p className="mt-5 max-w-[52ch] text-[17px] text-white/85 md:text-lg">{lead}</p>
+            <p className="mt-4 max-w-[52ch] text-[15px] text-white/85 md:mt-5 md:text-lg">{lead}</p>
             {priceFrom !== undefined && (
-              <p className="mt-6 flex items-baseline gap-3">
-                <span className="whitespace-nowrap text-3xl font-medium tabular-nums">от {fmt(priceFrom)}</span>
-                <span className="text-white/75">{priceUnit}</span>
+              <p className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-0.5 md:mt-6">
+                <span className="whitespace-nowrap text-2xl font-medium tabular-nums md:text-3xl">от {fmt(priceFrom)}</span>
+                <span className="text-[15px] text-white/75 md:text-base">{priceUnit}</span>
               </p>
             )}
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-2.5 md:mt-7 md:gap-3">
               <a href="#zayavka" className="btn-signal">{cta} <Arrow /></a>
               <a href={`tel:${s.phoneRaw}`} className="btn-white">{s.phone}</a>
               {secondary && <Link href={secondary.href} className="btn-white md:hidden">{secondary.label}</Link>}
