@@ -2,6 +2,7 @@ import { content } from "@/lib/content";
 import { meta } from "@/lib/seo";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import NeedsData from "@/components/NeedsData";
+import YandexMap from "@/components/YandexMap";
 import LeadForm from "@/components/LeadForm";
 
 const pg = content.pages.contacts;
@@ -36,12 +37,7 @@ export default function Page() {
             {s.legal.org}<br />ИНН {s.legal.inn}, ОГРН {s.legal.ogrn}<br />{s.postalCode}, {s.address}
           </div>
         </div>
-        <NeedsData className="min-h-[360px]">
-          {/* Карта: вставить iframe Яндекс Карт (Конструктор карт -> код) вместо этого блока */}
-          <div className="flex h-full min-h-[360px] items-center justify-center rounded-card bg-chalk p-6 text-center text-dim">
-            Сюда вставляется карта Яндекс с меткой Мультихолла и парковки. Код — из Конструктора карт Яндекса.
-          </div>
-        </NeedsData>
+        <YandexMap />
       </section>
       <section className="wrap section pt-0"><LeadForm /></section>
     </>

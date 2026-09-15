@@ -16,8 +16,8 @@
     "addressLocality": "Иркутск",
     "postalCode": "664009",
     "geo": {
-      "lat": 52.2715,
-      "lng": 104.3616
+      "lat": 52.264456,
+      "lng": 104.347518
     },
     "hours": "Пн–Вс 10:00–20:00",
     "managerHours": "Заявки принимаем ежедневно с 9:00 до 19:00",
@@ -36,7 +36,7 @@
         "url": "https://www.youtube.com/channel/UCMYmSv0OyeJLU0P-IO0QefA"
       }
     ],
-    "yandexMapsUrl": "https://yandex.ru/maps/?text=Иркутск, Ширямова 38/3",
+    "yandexMapsUrl": "https://yandex.ru/maps/org/patriot_park/85781061302/",
     "logo": {
       "color": "/logo/logo-color.svg",
       "white": "/logo/logo-white.svg",
@@ -47,7 +47,9 @@
       "text": "Разработка сайта",
       "name": "Байкал Таргет",
       "url": "https://baikal-target.ru/"
-    }
+    },
+    "yandexOrgId": "85781061302",
+    "yandexOrgSlug": "patriot_park"
   },
   "flags": {
     "showNeedsDataFrames": true
@@ -1094,8 +1096,7 @@
         },
         {
           "t": "На общественном транспорте",
-          "d": "Остановка «Парк Патриот» или «Аэропорт», далее 5 минут пешком.",
-          "needsData": true
+          "d": "Ближайшая остановка так и называется — «Парк Патриот», от неё 144 метра, около 3 минут пешком. Рядом также остановки «Микрорайон Крылатый», «Транспортная» и «Улица Станиславского»."
         },
         {
           "t": "Из аэропорта",
