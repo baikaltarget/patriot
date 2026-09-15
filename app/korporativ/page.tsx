@@ -40,7 +40,7 @@ export default function Page() {
       <section className="section bg-chalk">
         <div className="wrap">
           <h2 className="mb-2">Что стоит вечер</h2>
-          <p className="mb-8 max-w-[60ch] text-dim">Зал 15 000 ₽, звук 5 000, микрофон 2 000, уборка 1 500 — 23 500 ₽ за площадку на любое число гостей до 96. На 90 человек это около 260 ₽ с каждого.</p>
+          <p className="mb-8 max-w-[60ch] text-dim">Зал 15 000 ₽, звук 5 000, микрофон 2 000, уборка 1 500 — 23 500 ₽ за площадку на любое число гостей до 56. На 50 человек это около 470 ₽ с каждого.</p>
           <PriceTable compact />
           <p className="mt-6"><Link href="/#zayavka" className="text-brandBlue underline">Посчитать точнее в калькуляторе на главной</Link></p>
         </div>

@@ -87,7 +87,7 @@ export function SpecStrip() {
   const items = [
     { v: `${h.area}`, u: "м²", l: "площадь большого зала" },
     { v: `${h.capacityMax}`, u: "мест", l: "театром по официальной схеме" },
-    { v: "96", u: "мест", l: "банкетом за круглыми столами" },
+    { v: "56", u: "мест", l: "банкетом за круглыми столами" },
     { v: "70", u: "мест", l: "классом, столы рядами" },
     { v: `${h.height}`, u: "м", l: "высота потолка, подвес света" },
     { v: `${h.stageArea}`, u: "м²", l: "сцена 7,5 × 4 м" },
@@ -210,7 +210,7 @@ export function HallList({ title = "Два помещения" }: { title?: stri
 export function FormatList({ title = "Под какое мероприятие", exclude }: { title?: string; exclude?: string }) {
   const landing = [
     { name: "Конференции и форумы", href: "/konferenc-zal/", note: "до 175 участников театром, экран, звук, секции в малом зале", img: "/img/conf-01.jpg" },
-    { name: "Корпоративы и тимбилдинг", href: "/korporativ/", note: "до 96 гостей за столами, тир и фаертаг рядом", img: "/img/koncert-01.jpg" },
+    { name: "Корпоративы и тимбилдинг", href: "/korporativ/", note: "до 56 гостей за столами, тир и фаертаг рядом", img: "/img/koncert-01.jpg" },
     { name: "Концерты, выставки, съёмки", href: "/ploshchadka/", note: "сцена 30 м², подвес света, потолки 6 м", img: "/img/koncert-02.jpg" },
   ];
   return (
