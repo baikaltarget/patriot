@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import Metrika from "@/components/Metrika";
+import UtmCatcher from "@/components/UtmCatcher";
 import JsonLd from "@/components/JsonLd";
 import { localBusinessLd, organizationLd } from "@/lib/seo";
 
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <CookieBanner />
         <Metrika />
+        <UtmCatcher />
       </body>
     </html>
   );

@@ -33,21 +33,36 @@ export async function POST(req: Request) {
   const tel = phone.replace(/[^\d+]/g, "");
   const site = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "";
 
+  const utm = (body as unknown as { utm?: Record<string, string> }).utm ?? {};
+  const srcNames: Record<string, string> = {
+    utm_source: "Источник",
+    utm_medium: "Канал",
+    utm_campaign: "Кампания",
+    utm_content: "Объявление",
+    utm_term: "Ключевое слово",
+    yclid: "Яндекс.Директ (yclid)",
+    gclid: "Google Ads (gclid)",
+    referrer: "Перешёл с",
+  };
+  const srcLines = Object.entries(utm)
+    .filter(([, v]) => v)
+    .map(([k, v]) => `${srcNames[k] ?? k}: ${esc(v)}`);
+
   const lines = [
-    "<b>Заявка с сайта Мультихолл</b>",
+    "📩 <b>Заявка с сайта Мультихолл</b>",
     "",
-    `☎️ <a href="tel:${esc(tel)}">${esc(phone)}</a>`,
-    body.name && `👤 ${esc(body.name)}`,
-    body.company && `🏢 ${esc(body.company)}`,
+    `<b>Телефон:</b> <a href="tel:${esc(tel)}">${esc(phone)}</a>`,
+    body.name && `<b>Имя:</b> ${esc(body.name)}`,
+    body.company && `<b>Компания:</b> ${esc(body.company)}`,
+    body.event && `<b>Мероприятие:</b> ${esc(body.event)}`,
+    body.date && `<b>Дата:</b> ${esc(body.date)}`,
+    body.guests && `<b>Участников:</b> ${esc(body.guests)}`,
+    body.comment && `<b>Комментарий:</b> ${esc(body.comment)}`,
+    body.estimate && `<b>Расчёт:</b> ${esc(body.estimate)}`,
     "",
-    body.event && `Мероприятие: <b>${esc(body.event)}</b>`,
-    body.date && `Дата: ${esc(body.date)}`,
-    body.guests && `Участников: ${esc(body.guests)}`,
-    body.comment && `\nКомментарий: ${esc(body.comment)}`,
-    body.estimate && `\n💰 Расчёт: ${esc(body.estimate)}`,
-    "",
+    body.page && (site ? `<b>Страница:</b> ${site}${esc(body.page)}` : `<b>Страница:</b> ${esc(body.page)}`),
+    srcLines.length ? srcLines.map((l) => `<b>${l.split(":")[0]}:</b>${l.slice(l.indexOf(":") + 1)}`).join("\n") : "<b>Источник:</b> прямой заход",
     `<i>${esc(when)} (Иркутск)</i>`,
-    body.page && (site ? `Страница: ${site}${esc(body.page)}` : `Страница: ${esc(body.page)}`),
   ].filter((x): x is string => typeof x === "string");
 
   const text = lines.join("\n");

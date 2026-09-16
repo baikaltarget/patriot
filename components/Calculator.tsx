@@ -2,6 +2,7 @@
 import { useMemo, useState } from "react";
 import { content, estimate, fmt } from "@/lib/content";
 import { reachGoal } from "@/lib/goals";
+import { getUtm } from "@/lib/utm";
 
 type Duration = "short" | "day" | "twodays" | "hourly";
 
@@ -55,7 +56,7 @@ export default function Calculator() {
       const r = await fetch("/api/lead/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, event: fname, guests: String(guests), comment: "Из калькулятора", estimate: estimateText, page: location.pathname }),
+        body: JSON.stringify({ phone, event: fname, guests: String(guests), comment: "Из калькулятора", estimate: estimateText, page: location.pathname, utm: getUtm() }),
       });
       const j = await r.json();
       setSent(j.ok ? "ok" : j.reason === "notconfigured" ? "notconfigured" : "error");
