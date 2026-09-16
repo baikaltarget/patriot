@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Hero, SpecStrip, Blocks, Gallery, HallList, CaseList, FormatList } from "@/components/Sections";
 import PriceTable from "@/components/PriceTable";
 import LeadForm from "@/components/LeadForm";
+import Catering from "@/components/Catering";
 import Link from "next/link";
 import Faq from "@/components/Faq";
 
@@ -42,6 +43,7 @@ export default function Page() {
       </section>
       <CaseList filter={(c) => ["Конференция", "Форум", "Презентация"].includes(c.format)} title="Деловые мероприятия со сметой" />
       <FormatList title="Форматы деловых мероприятий" />
+      <Catering />
       <section className="wrap section pt-0">
         <h2 className="mb-6">Перед бронированием</h2>
         <ul className="grid gap-4 md:grid-cols-2">

@@ -7,6 +7,7 @@ import { Hero, SpecStrip, Blocks, Gallery, HallList, FormatList, CaseList, Seati
 import PriceTable from "@/components/PriceTable";
 import Calculator from "@/components/Calculator";
 import LeadForm from "@/components/LeadForm";
+import Catering from "@/components/Catering";
 import Faq from "@/components/Faq";
 import Facts from "@/components/Facts";
 import Booking from "@/components/Booking";
@@ -57,6 +58,7 @@ export default function Home() {
           <Calculator />
         </div>
       </section>
+      <Catering />
       <Booking />
       <CaseList limit={3} />
       <Facts />

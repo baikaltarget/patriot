@@ -6,6 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Hero, SpecStrip, Blocks, Gallery, CaseList, TeamBuilding, SeatingSchemes } from "@/components/Sections";
 import PriceTable from "@/components/PriceTable";
 import LeadForm from "@/components/LeadForm";
+import Catering from "@/components/Catering";
 import Faq from "@/components/Faq";
 
 const pg = content.pages.corporate;
@@ -46,6 +47,7 @@ export default function Page() {
           <p className="mt-6"><Link href="/#zayavka" className="text-brandBlue underline">Посчитать точнее в калькуляторе на главной</Link></p>
         </div>
       </section>
+      <Catering />
       <CaseList filter={(c) => c.format === "Корпоратив"} title="Корпоративы со сметой" />
       <Faq items={pg.faq} />
       <section className="wrap section pt-0"><LeadForm title="Заявка на корпоратив" preset={{ event: "Корпоратив" }} /></section>

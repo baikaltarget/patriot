@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Hero, SpecStrip, Blocks, Gallery, SeatingSchemes, CaseList } from "@/components/Sections";
 import PriceTable from "@/components/PriceTable";
 import LeadForm from "@/components/LeadForm";
+import Catering from "@/components/Catering";
 import Faq from "@/components/Faq";
 
 const pg = content.pages.graduation;
@@ -45,6 +46,7 @@ export default function Page() {
           <PriceTable compact />
         </div>
       </section>
+      <Catering />
       <CaseList filter={(c) => ["Фестиваль", "Мастер-класс"].includes(c.format)} title="Детские мероприятия со сметой" />
       <Faq items={pg.faq} />
       <section className="wrap section pt-0"><LeadForm title="Заявка на выпускной" preset={{ event: "Другое", comment: "Выпускной" }} /></section>

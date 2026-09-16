@@ -4,6 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Hero, Blocks, Gallery, TeamBuilding } from "@/components/Sections";
 import LeadForm from "@/components/LeadForm";
+import Catering from "@/components/Catering";
 import Faq from "@/components/Faq";
 
 const pg = content.pages.newYear;
@@ -23,6 +24,7 @@ export default function Page() {
         cta="Проверить дату"
       />
       <Blocks items={pg.blocks} />
+      <Catering />
       <TeamBuilding />
       <Gallery
         title="С прошлых праздников"
