@@ -41,7 +41,7 @@ export default function LeadForm({
     if (!values.phone || !values.agree) return;
     setStatus("sending");
     try {
-      const r = await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...values, page: typeof location !== "undefined" ? location.pathname : "" }) });
+      const r = await fetch("/api/lead/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...values, page: typeof location !== "undefined" ? location.pathname : "" }) });
       const j = await r.json();
       setStatus(j.ok ? "ok" : j.reason === "notconfigured" ? "notconfigured" : "error");
       if (j.ok || j.reason === "notconfigured") reachGoal("lead_form_submit", { event: values.event, guests: values.guests });

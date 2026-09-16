@@ -52,7 +52,7 @@ export default function Calculator() {
     const fname = formats.find((x) => x.id === format)?.name ?? "";
     const estimateText = `${est.lines.map((l) => `${l.name} — ${fmt(l.price)}`).join("; ")}; итого ${fmt(est.total)}`;
     try {
-      const r = await fetch("/api/lead", {
+      const r = await fetch("/api/lead/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone, event: fname, guests: String(guests), comment: "Из калькулятора", estimate: estimateText, page: location.pathname }),
