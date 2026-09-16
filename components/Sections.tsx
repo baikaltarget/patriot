@@ -222,7 +222,7 @@ export function FormatList({ title = "Под какое мероприятие",
   const landing = [
     { name: "Конференции и форумы", href: "/konferenc-zal/", note: "до 175 участников театром, экран, звук, секции в малом зале", img: "/img/conf-01.jpg" },
     { name: "Корпоративы и тимбилдинг", href: "/korporativ/", note: "до 56 гостей за столами, тир и фаертаг рядом", img: "/img/koncert-01.jpg" },
-    { name: "Концерты, выставки, съёмки", href: "/ploshchadka/", note: "сцена 30 м², подвес света, потолки 6 м", img: "/img/koncert-02.jpg" },
+    { name: "Съёмки, показы, другие форматы", href: "/ploshchadka/", note: "сцена 30 м², подвес света, зал без колонн", img: "/img/koncert-02.jpg" },
   ];
   return (
     <section className="section">

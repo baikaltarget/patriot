@@ -27,7 +27,7 @@ export default function Page() {
       <SpecStrip />
       <Blocks items={pg.blocks} />
       <Gallery
-        title="Реальные концерты и события"
+        title="Как выглядит зал в работе"
         images={[
           { src: "/img/koncert-01.jpg", alt: "Награждение на сцене с цветной подсветкой" },
           { src: "/img/festival-01.jpg", alt: "Праздничная программа на сцене" },
@@ -39,7 +39,14 @@ export default function Page() {
       <section className="section bg-chalk">
         <div className="wrap"><h2 className="mb-8">Тарифы</h2><PriceTable compact /><p className="mt-6 text-dim">Свет, подвес, конференц-системы и персонал — в <Link href="/oborudovanie/" className="text-brandBlue underline">полном прайсе оборудования</Link>.</p></div>
       </section>
-      <CaseList filter={(c) => ["Выставка", "Презентация"].includes(c.format)} title="Выставки и презентации со сметой" />
+      <section className="wrap section pt-0">
+        <h2 className="mb-6">Если формат конкретный</h2>
+        <ul className="grid gap-4 md:grid-cols-2">
+          <li className="card"><Link href="/format/koncert/" className="no-underline"><h3 className="hover:underline">Зал для концерта</h3><p className="mt-2 text-[15px] text-dim">До 175 зрителей театром, звук, световые головы, звукооператор площадки.</p></Link></li>
+          <li className="card"><Link href="/format/vystavka/" className="no-underline"><h3 className="hover:underline">Площадка для выставки и ярмарки</h3><p className="mt-2 text-[15px] text-dim">Зал без колонн под стенды, розетки по периметру, тариф на два дня.</p></Link></li>
+        </ul>
+      </section>
+      <CaseList limit={3} title="Проведённые мероприятия со сметой" />
       <FormatList title="Форматы" />
       <Faq items={pg.faq} />
       <section className="wrap section pt-0"><LeadForm title="Заявка на площадку" preset={{ event: "Концерт или показ" }} /></section>
