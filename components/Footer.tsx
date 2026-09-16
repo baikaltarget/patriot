@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { content } from "@/lib/content";
+import TrackLink from "./TrackLink";
 
 export default function Footer() {
   const s = content.site;
@@ -9,12 +10,12 @@ export default function Footer() {
         <div>
           <img src={s.logo.white} alt={s.parentName} width={168} height={72} className="h-12 w-auto" />
           <div className="mt-3 text-white/60">{s.name}</div>
-          <a href={`tel:${s.phoneRaw}`} className="mt-5 block text-2xl font-bold no-underline">{s.phone}</a>
+          <TrackLink href={`tel:${s.phoneRaw}`} goal="phone_click" className="mt-5 block text-2xl font-bold no-underline">{s.phone}</TrackLink>
           <div className="text-white/60">{s.managerHours}</div>
           <address className="mt-4 not-italic text-white/80">
             {s.address}
             <br />
-            <a href={`mailto:${s.email}`} className="text-white/60 hover:text-white">{s.email}</a>
+            <TrackLink href={`mailto:${s.email}`} goal="email_click" className="text-white/60 hover:text-white">{s.email}</TrackLink>
           </address>
         </div>
         <nav aria-label="Мероприятия">

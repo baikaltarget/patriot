@@ -1,5 +1,6 @@
 import JsonLd from "./JsonLd";
 import { content } from "@/lib/content";
+import TrackLink from "./TrackLink";
 import { howToLd } from "@/lib/seo";
 
 /** Как забронировать — нумерованные шаги + разметка HowTo для быстрых ответов. */
@@ -20,7 +21,7 @@ export default function Booking() {
           ))}
         </ol>
         <div className="mt-6 flex flex-wrap gap-3">
-          <a href={`tel:${s.phoneRaw}`} className="btn-signal">Позвонить {s.phone}</a>
+          <TrackLink href={`tel:${s.phoneRaw}`} goal="phone_click" className="btn-signal">Позвонить {s.phone}</TrackLink>
           <a href="#zayavka" className="btn-ghost">Оставить заявку</a>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { content } from "@/lib/content";
+import { reachGoal } from "@/lib/goals";
 
 /**
  * Карта Яндекса на виджете организации: реальная метка, карточка с отзывами и кнопка «Маршрут».
@@ -25,7 +26,7 @@ export default function YandexMap() {
       ) : (
         <button
           type="button"
-          onClick={() => setLoaded(true)}
+          onClick={() => { setLoaded(true); reachGoal("map_open"); }}
           className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center"
         >
           <span className="text-lg font-medium">{s.address}</span>

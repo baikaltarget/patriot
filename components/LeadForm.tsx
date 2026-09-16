@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { content } from "@/lib/content";
+import { reachGoal } from "@/lib/goals";
 
 type Status = "idle" | "sending" | "ok" | "notconfigured" | "error";
 
@@ -43,6 +44,7 @@ export default function LeadForm({
       const r = await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...values, page: typeof location !== "undefined" ? location.pathname : "" }) });
       const j = await r.json();
       setStatus(j.ok ? "ok" : j.reason === "notconfigured" ? "notconfigured" : "error");
+      if (j.ok || j.reason === "notconfigured") reachGoal("lead_form_submit", { event: values.event, guests: values.guests });
     } catch {
       setStatus("error");
     }
@@ -99,8 +101,8 @@ export default function LeadForm({
               <button type="submit" disabled={status === "sending"} className="btn-signal">
                 {status === "sending" ? "Отправляем" : "Отправить заявку"}
               </button>
-              <a href={`tel:${s.phoneRaw}`} className="btn-ghost">Позвонить {s.phone}</a>
-              {tgLink && <a href={tgLink} className="btn-ghost" target="_blank" rel="noopener">Написать в Telegram</a>}
+              <a href={`tel:${s.phoneRaw}`} onClick={() => reachGoal("phone_click")} className="btn-ghost">Позвонить {s.phone}</a>
+              {tgLink && <a href={tgLink} onClick={() => reachGoal("telegram_click")} className="btn-ghost" target="_blank" rel="noopener">Написать в Telegram</a>}
             </div>
             {status === "notconfigured" && (
               <p className="text-sm text-alert md:col-span-2">

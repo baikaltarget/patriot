@@ -1,6 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import { content, estimate, fmt } from "@/lib/content";
+import { reachGoal } from "@/lib/goals";
 
 type Duration = "short" | "day" | "twodays" | "hourly";
 
@@ -58,6 +59,7 @@ export default function Calculator() {
       });
       const j = await r.json();
       setSent(j.ok ? "ok" : j.reason === "notconfigured" ? "notconfigured" : "error");
+      if (j.ok || j.reason === "notconfigured") reachGoal("calc_lead_submit", { total: est.total, guests });
     } catch {
       setSent("error");
     }
@@ -162,7 +164,7 @@ export default function Calculator() {
             )}
             <div className="mt-6 flex gap-2">
               <button type="button" onClick={() => setStep(2)} className="btn-ghost">Назад</button>
-              <button type="button" onClick={() => setStep(4)} className="btn-signal">Посчитать</button>
+              <button type="button" onClick={() => { setStep(4); reachGoal("calc_finish", { total: est.total, guests }); }} className="btn-signal">Посчитать</button>
             </div>
           </div>
         )}
@@ -201,7 +203,7 @@ export default function Calculator() {
                   </button>
                   {sent === "notconfigured" && <p className="mt-2 text-sm text-alert">Отправка ещё не настроена. Позвоните {s.phone}, расчёт сохранён в логе.</p>}
                   {sent === "error" && <p className="mt-2 text-sm text-alert">Не отправилось. Позвоните {s.phone}.</p>}
-                  <a href={`tel:${s.phoneRaw}`} className="mt-3 block text-center text-sm underline">или позвонить {s.phone}</a>
+                  <a href={`tel:${s.phoneRaw}`} onClick={() => reachGoal("phone_click")} className="mt-3 block text-center text-sm underline">или позвонить {s.phone}</a>
                 </>
               )}
             </div>

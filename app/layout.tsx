@@ -5,6 +5,7 @@ import { content, SITE_URL } from "@/lib/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import Metrika from "@/components/Metrika";
 import JsonLd from "@/components/JsonLd";
 import { localBusinessLd, organizationLd } from "@/lib/seo";
 
@@ -27,6 +28,12 @@ export const metadata: Metadata = {
   title: content.pages.home.title,
   description: content.pages.home.description,
   robots: { index: true, follow: true },
+  // Подтверждение прав в Яндекс.Вебмастере и Google Search Console.
+  // Коды — в content/site.json -> site.verification. Пустое значение не выводится.
+  verification: {
+    ...(content.site.verification?.yandex ? { yandex: content.site.verification.yandex } : {}),
+    ...(content.site.verification?.google ? { google: content.site.verification.google } : {}),
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -40,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <CookieBanner />
-        {/* Счётчики: Яндекс.Метрика вставляется сюда, перед </body>. См. README. */}
+        <Metrika />
       </body>
     </html>
   );
