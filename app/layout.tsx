@@ -28,6 +28,14 @@ export const metadata: Metadata = {
   title: content.pages.home.title,
   description: content.pages.home.description,
   robots: { index: true, follow: true },
+  // /favicon.ico лежит в public — его ищут Яндекс.Вебмастер, Метрика и Search Console.
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: "/apple-icon.png",
+  },
   // Подтверждение прав в Яндекс.Вебмастере и Google Search Console.
   // Коды — в content/site.json -> site.verification. Пустое значение не выводится.
   verification: {
