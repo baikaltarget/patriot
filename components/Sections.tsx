@@ -2,6 +2,7 @@ import Link from "next/link";
 import Zoom from "./Zoom";
 import NeedsData from "./NeedsData";
 import PhotoSlot from "./PhotoSlot";
+import Pic from "./Pic";
 import { caseEstimate, content, fmt, layoutName } from "@/lib/content";
 
 function Arrow({ className = "" }: { className?: string }) {
@@ -50,7 +51,7 @@ export function Hero({
   return (
     <section className="wrap py-5 md:py-6">
       <div className="relative overflow-hidden rounded-card bg-ink text-white">
-        <img src={image.src} alt={image.alt} className="absolute inset-0 h-full w-full object-cover" />
+        <Pic src={image.src} alt={image.alt} className="absolute inset-0 h-full w-full object-cover" priority sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/15" aria-hidden />
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent" aria-hidden />
         <div className="relative z-10 flex min-h-[440px] flex-col justify-center p-6 md:min-h-[640px] md:p-14 xl:p-16">
@@ -199,7 +200,7 @@ export function HallList({ title = "Два помещения" }: { title?: stri
             return (
               <NeedsData key={h.slug} on={!!("needsData" in h && h.needsData)} className={big ? "md:col-span-2" : ""}>
                 <Link href={`/zaly/${h.slug}/`} className={`photo-card block aspect-[4/5] md:aspect-auto md:h-full ${big ? "md:min-h-[520px]" : "md:min-h-[520px]"}`}>
-                  <img src={h.photo} alt={h.name} />
+                  <Pic src={h.photo} alt={h.name} className="h-full w-full object-cover transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
                   <div className="shade" />
                   <div className="body">
                     <div className="text-sm text-white/75">{h.area} м² · {h.capacity}</div>
@@ -230,7 +231,7 @@ export function FormatList({ title = "Под какое мероприятие",
         <div className="grid gap-4 md:grid-cols-3">
           {landing.map((l) => (
             <Link key={l.href} href={l.href} className="photo-card aspect-[4/3]">
-              <img src={l.img} alt={l.name} />
+              <Pic src={l.img} alt={l.name} className="h-full w-full object-cover transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
               <div className="shade" />
               <div className="body">
                 <h3 className="text-xl text-white">{l.name}</h3>
@@ -317,7 +318,7 @@ export function LocationCards({ title, items }: { title?: string; items: { image
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((it) => (
             <div key={it.href} className="card flex flex-col !p-4">
-              <div className="aspect-[4/3] overflow-hidden rounded-cardSm"><img src={it.image} alt={it.alt} className="h-full w-full object-cover" /></div>
+              <div className="aspect-[4/3] overflow-hidden rounded-cardSm"><Pic src={it.image} alt={it.alt} className="h-full w-full object-cover" sizes="(max-width: 768px) 50vw, 25vw" /></div>
               <h3 className="mt-4">{it.name}</h3>
               <p className="mt-2 flex-1 text-[15px] text-dim">{it.description}</p>
               <Link href={it.href} className="btn-signal mt-4 self-start">Узнать подробнее <Arrow /></Link>

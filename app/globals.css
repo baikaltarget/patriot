@@ -75,6 +75,7 @@
 
   /* Фото-карточка с заголовком и ценой поверх снимка (как «Дома от 5 000 000 ₽» в референсе) */
   .photo-card { @apply relative block overflow-hidden rounded-card bg-chalk no-underline; }
+  .photo-card picture { @apply block h-full w-full; }
   .photo-card img { @apply h-full w-full object-cover transition-transform duration-500; }
   .photo-card:hover img { @apply scale-[1.03]; }
   .photo-card .shade { @apply pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent; }

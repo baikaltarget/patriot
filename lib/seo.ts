@@ -16,6 +16,13 @@ export function meta(o: { title: string; description: string; path: string; type
       siteName: `${s.name} — ${s.parentName}`,
       locale: "ru_RU",
       type: o.type ?? "website",
+      images: [{ url: `${SITE_URL}${s.ogImage}`, width: 1200, height: 630, alt: o.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: o.title,
+      description: o.description,
+      images: [`${SITE_URL}${s.ogImage}`],
     },
   };
 }
@@ -28,7 +35,7 @@ export function organizationLd() {
     url: SITE_URL,
     telephone: s.phoneRaw,
     email: s.email,
-    sameAs: s.socials.map((x) => x.url),
+    sameAs: s.sameAs,
     address: {
       "@type": "PostalAddress",
       streetAddress: s.addressStreet,
@@ -69,6 +76,20 @@ export function localBusinessLd() {
       },
     ],
     maximumAttendeeCapacity: content.hall.capacityMax,
+    hasMap: s.yandexMapsUrl,
+    sameAs: s.sameAs,
+    currenciesAccepted: "RUB",
+    paymentAccepted: "Наличные, банковская карта, безналичный расчёт",
+    publicAccess: true,
+    isAccessibleForFree: false,
+    amenityFeature: [
+      { "@type": "LocationFeatureSpecification", name: "Проекционный экран", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Сцена 30 м²", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Звуковое оборудование", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Wi-Fi", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Бесплатная парковка", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Свой кейтеринг разрешён", value: true },
+    ],
     parentOrganization: { "@type": "Organization", name: s.parentName, url: s.parentUrl },
   };
 }
@@ -109,6 +130,31 @@ export function productLd(o: { name: string; description: string; path: string; 
       availability: "https://schema.org/InStock",
       seller: { "@id": `${SITE_URL}/#venue` },
     },
+  };
+}
+
+export function howToLd(o: { name: string; steps: { t: string; d: string }[]; price: number }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: o.name,
+    description: `Как забронировать зал в Мультихолле, Иркутск. Аренда от ${o.price} ₽.`,
+    totalTime: "PT10M",
+    estimatedCost: { "@type": "MonetaryAmount", currency: "RUB", value: o.price },
+    step: o.steps.map((st, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: st.t,
+      text: st.d,
+    })),
+  };
+}
+
+export function speakableLd(selectors: string[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    speakable: { "@type": "SpeakableSpecification", cssSelector: selectors },
   };
 }
 

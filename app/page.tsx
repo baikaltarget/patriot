@@ -2,11 +2,14 @@ import Link from "next/link";
 import { content } from "@/lib/content";
 import { meta, serviceLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
+import { speakableLd } from "@/lib/seo";
 import { Hero, SpecStrip, Blocks, Gallery, HallList, FormatList, CaseList, SeatingSchemes } from "@/components/Sections";
 import PriceTable from "@/components/PriceTable";
 import Calculator from "@/components/Calculator";
 import LeadForm from "@/components/LeadForm";
 import Faq from "@/components/Faq";
+import Facts from "@/components/Facts";
+import Booking from "@/components/Booking";
 
 const pg = content.pages.home;
 export const metadata = meta({ title: pg.title, description: pg.description, path: "/" });
@@ -15,6 +18,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={serviceLd({ name: "Аренда зала для мероприятий", description: pg.description, path: "/", price: 15000, priceUnit: "за мероприятие 4–6 часов" })} />
+      <JsonLd data={speakableLd(["h1", "[data-speakable]", ".faq-answer"])} />
       <Hero
         h1={pg.h1}
         lead={pg.lead}
@@ -40,7 +44,7 @@ export default function Home() {
       <section className="section bg-chalk">
         <div className="wrap">
           <div className="mb-8 flex items-baseline justify-between gap-6">
-            <h2>Цены</h2>
+            <h2>Сколько стоит аренда зала</h2>
             <Link href="/ceny/" className="text-brandBlue hover:underline">Подробнее о ценах</Link>
           </div>
           <PriceTable compact />
@@ -48,12 +52,14 @@ export default function Home() {
       </section>
       <section className="section">
         <div className="wrap">
-          <h2 className="mb-2">Посчитать стоимость</h2>
+          <h2 className="mb-2">Как посчитать стоимость мероприятия</h2>
           <p className="mb-8 max-w-[60ch] text-dim">Четыре вопроса — и сумма по прайсу. Без «от» и без звонка, чтобы узнать цену.</p>
           <Calculator />
         </div>
       </section>
+      <Booking />
       <CaseList limit={3} />
+      <Facts />
       <Faq items={pg.faq} />
       <section className="wrap section pt-0">
         <LeadForm />

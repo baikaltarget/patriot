@@ -3,6 +3,7 @@ import { meta } from "@/lib/seo";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import PhotoSlot from "@/components/PhotoSlot";
 import { Gallery, HallList, SpecStrip } from "@/components/Sections";
+import Facts from "@/components/Facts";
 import LeadForm from "@/components/LeadForm";
 
 const pg = content.pages.about;
@@ -32,6 +33,7 @@ export default function Page() {
           { src: "/img/kids-02.jpg", alt: "Детское мероприятие в Мультихолле" },
         ]}
       />
+      <Facts />
       <HallList />
       <section className="wrap section pt-0"><LeadForm /></section>
     </>

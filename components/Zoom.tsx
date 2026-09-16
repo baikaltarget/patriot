@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
+import Pic from "./Pic";
 
 /** Клик по картинке — открывает её во весь экран. Esc или клик по фону — закрыть. */
-export default function Zoom({ src, alt, className = "", imgClassName = "" }: { src: string; alt: string; className?: string; imgClassName?: string }) {
+export default function Zoom({ src, alt, className = "", imgClassName = "", priority = false }: { src: string; alt: string; className?: string; imgClassName?: string; priority?: boolean }) {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     if (!open) return;
@@ -14,7 +15,7 @@ export default function Zoom({ src, alt, className = "", imgClassName = "" }: { 
   return (
     <>
       <button type="button" onClick={() => setOpen(true)} className={`block h-full w-full cursor-zoom-in ${className}`} aria-label={`Увеличить: ${alt}`}>
-        <img src={src} alt={alt} className={imgClassName} loading="lazy" />
+        <Pic src={src} alt={alt} className={imgClassName} priority={priority} />
       </button>
       {open && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 cursor-zoom-out" onClick={() => setOpen(false)} role="dialog" aria-modal="true" aria-label={alt}>

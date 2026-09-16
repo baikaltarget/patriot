@@ -8,12 +8,14 @@ export default function PhotoSlot({
   ratio = "4/3",
   className = "",
   placeholder = true,
+  priority = false,
 }: {
   src: string;
   alt: string;
   ratio?: string;
   className?: string;
   placeholder?: boolean;
+  priority?: boolean;
 }) {
   return (
     <NeedsData on={placeholder} photo className={className}>
@@ -24,7 +26,7 @@ export default function PhotoSlot({
           </div>
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
-          <Zoom src={src} alt={alt} className="absolute inset-0" imgClassName="h-full w-full object-cover" />
+          <Zoom src={src} alt={alt} className="absolute inset-0" imgClassName="h-full w-full object-cover" priority={priority} />
         )}
       </figure>
     </NeedsData>

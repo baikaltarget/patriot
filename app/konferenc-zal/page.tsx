@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Hero, SpecStrip, Blocks, Gallery, HallList, CaseList, FormatList } from "@/components/Sections";
 import PriceTable from "@/components/PriceTable";
 import LeadForm from "@/components/LeadForm";
+import Link from "next/link";
 import Faq from "@/components/Faq";
 
 const pg = content.pages.conference;
@@ -41,6 +42,13 @@ export default function Page() {
       </section>
       <CaseList filter={(c) => ["Конференция", "Форум", "Презентация"].includes(c.format)} title="Деловые мероприятия со сметой" />
       <FormatList title="Форматы деловых мероприятий" />
+      <section className="wrap section pt-0">
+        <h2 className="mb-6">Перед бронированием</h2>
+        <ul className="grid gap-4 md:grid-cols-2">
+          <li className="card"><Link href="/blog/kak-organizovat-konferenciyu-chek-list/" className="no-underline"><h3 className="hover:underline">Чек-лист площадки для конференции</h3><p className="mt-2 text-[15px] text-dim">20 вещей, которые стоит проверить до подписания договора.</p></Link></li>
+          <li className="card"><Link href="/blog/skolko-stoit-arenda-zala-v-irkutske/" className="no-underline"><h3 className="hover:underline">Сколько стоит аренда зала в Иркутске</h3><p className="mt-2 text-[15px] text-dim">Модели оплаты, что входит в цену и за что берут отдельно.</p></Link></li>
+        </ul>
+      </section>
       <Faq items={pg.faq} />
       <section className="wrap section pt-0"><LeadForm title="Запросить расчёт для конференции" preset={{ event: "Конференция" }} /></section>
     </>

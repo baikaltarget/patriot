@@ -31,9 +31,29 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <div className="prose mt-8" dangerouslySetInnerHTML={{ __html: p.html }} />
       </article>
       <section className="wrap section pt-0">
-        <h2 className="mb-4">Ещё в блоге</h2>
-        <ul className="grid gap-3">
-          {others.map((o) => <li key={o.slug}><Link href={`/blog/${o.slug}/`} className="underline">{o.title}</Link></li>)}
+        <h2 className="mb-6">Ещё в блоге</h2>
+        <ul className="grid gap-4 md:grid-cols-3">
+          {others.map((o) => (
+            <li key={o.slug} className="card">
+              <Link href={`/blog/${o.slug}/`} className="no-underline">
+                <h3 className="hover:underline">{o.title}</h3>
+                <p className="mt-2 text-[15px] text-dim">{o.description}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <h2 className="mb-6 mt-12">Посмотреть площадку</h2>
+        <ul className="flex flex-wrap gap-2">
+          {[
+            { n: "Конференц-зал", h: "/konferenc-zal/" },
+            { n: "Корпоратив", h: "/korporativ/" },
+            { n: "Выпускной", h: "/vypusknoy/" },
+            { n: "Концерты и выставки", h: "/ploshchadka/" },
+            { n: "Цены", h: "/ceny/" },
+            { n: "Проведённые мероприятия", h: "/meropriyatiya/" },
+          ].map((x) => (
+            <li key={x.h}><Link href={x.h} className="inline-block rounded-pill border border-line px-4 py-2 text-[15px] no-underline hover:border-ink">{x.n}</Link></li>
+          ))}
         </ul>
       </section>
       <section className="wrap section pt-0"><LeadForm title="Посчитать площадку под своё мероприятие" /></section>

@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import NeedsData from "@/components/NeedsData";
 import YandexMap from "@/components/YandexMap";
 import LeadForm from "@/components/LeadForm";
+import Booking from "@/components/Booking";
 
 const pg = content.pages.contacts;
 const s = content.site;
@@ -39,6 +40,7 @@ export default function Page() {
         </div>
         <YandexMap />
       </section>
+      <Booking />
       <section className="wrap section pt-0"><LeadForm /></section>
     </>
   );

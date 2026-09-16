@@ -18,7 +18,7 @@ export default function Faq({ items, title = "Вопросы и ответы" }:
                   <span>{it.q}</span>
                   <span aria-hidden className="dimension shrink-0 transition-transform group-open:rotate-45">+</span>
                 </summary>
-                <p className="max-w-[68ch] pb-5 text-dim">{it.a}</p>
+                <p className="faq-answer max-w-[68ch] pb-5 text-dim">{it.a}</p>
               </details>
             </NeedsData>
           ))}
